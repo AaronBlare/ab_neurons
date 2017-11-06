@@ -1,0 +1,66 @@
+clear all;
+
+data_path = '../../source/cpp/NS/NS';
+
+fin = 5.0;
+b = 5.0;
+
+
+spins = [1 2 3 4 5 6]';
+
+num_spins = size(spins, 1);
+
+seed_start = 0;
+seed_num = 17;
+
+real_dn = int_dn + 1;
+if int_dt == 1
+    real_dn = int_dn + 2;
+end
+
+magn_avg = zeros(real_dn, 1);
+periods = zeros(real_dn, 1);
+
+for seed = seed_start : seed_start + (seed_num - 1)
+    
+    suffix = sprintf('N(%d)_dt(%d)_dp(%0.4f)_g(%0.4f)_J(%0.4f)_hz(%0.4f)_hx(%0.4f)_t0(%0.4f)_t1(%0.4f)_seed(%d)', ...
+        N, ...
+        dt, ...
+        dp, ...
+        g, ...
+        J, ...
+        h_z, ...
+        h_x, ...
+        t_0, ...
+        t_1, ...
+        seed);
+    
+    fn = sprintf('%s/magnetization_%s.txt', ...
+        data_path, ...
+        suffix);
+    curr_data = importdata(fn);
+    
+    for spin_id = 1:num_spins
+        spin = spins(spin_id);
+        
+        magn_avg = magn_avg + curr_data(:, spin) / (num_spins * seed_num);
+    end
+    
+    if (seed == seed_start)
+        fn = sprintf('%s/periods_%s.txt', ...
+            data_path, ...
+            suffix);
+        periods = importdata(fn);
+    end
+    
+end
+
+fig = figure;
+hLine = plot(periods, magn_avg);
+set(gca, 'FontSize', 30);
+xlabel('$\frac{t}{T}$', 'Interpreter', 'latex');
+set(gca, 'FontSize', 30);
+set(gca, 'XScale', 'log');
+ylabel('$Z(t)$', 'Interpreter', 'latex');
+propertyeditor('on')
+

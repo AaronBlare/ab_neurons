@@ -19,7 +19,7 @@ string file_name_suffix(RunParam &rp, ConfigParam &cp, int precision)
 {
 	stringstream fns;
 
-	fns << "_fin(" << setprecision(precision) << fixed << cp.e_1_f_in << ")";
+	fns << "_fin(" << setprecision(precision) << fixed << cp.e_1_2_f_in << ")";
 	fns << "_b(" << setprecision(precision) << fixed << cp.e_2_b << ")";
 	fns << "_seed(" << cp.seed << ")";
 	fns << ".txt";

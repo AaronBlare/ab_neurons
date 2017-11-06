@@ -76,17 +76,17 @@ struct RunParam
 
 struct ConfigParam
 {
-	double T;
-	double step;
+	int ns;
+	int nsps;
 
 	int ict;
 
-	int nd;
+	int ndps;
 
 	double e_1_alpha_x;
-	double e_1_tau;
-	double e_1_f_in;
 
+	double e_1_2_f_in;
+	double e_1_2_tau;
 	double e_1_2_k_pre;
 	
 	double e_2_alpha_I;
@@ -99,7 +99,7 @@ struct ConfigParam
 	double e_3_g_K;
 	double e_3_E_K;
 	double e_3_g_l;
-	double e_3_e_l;
+	double e_3_E_l;
 	double e_3_I_th;
 	double e_3_theta_x;
 	double e_3_k_x;
@@ -125,17 +125,17 @@ struct ConfigParam
 	int seed;
 
 	ConfigParam(
-		double _T = 100.0,
-		double _step = 0.001,
+		double _ns = 100,
+		double _nsps = 1000,
 
 		int _ict = 0,
 
-		int _nd = 100,
+		int _ndps = 1,
 
 		double _e_1_alpha_x = 0.05,
-		double _e_1_tau = 1.0,
-		double _e_1_f_in = 0.5,
 
+		double _e_1_2_f_in = 0.5,
+		double _e_1_2_tau = 1.0,
 		double _e_1_2_k_pre = 1.0,
 
 		double _e_2_alpha_I = 0.1,
@@ -148,7 +148,7 @@ struct ConfigParam
 		double _e_3_g_K = 36.0,
 		double _e_3_E_K = -12.0,
 		double _e_3_g_l = 0.3,
-		double _e_3_e_l = 10.6,
+		double _e_3_E_l = 10.6,
 		double _e_3_I_th = 5.5,
 		double _e_3_theta_x = 0.35,
 		double _e_3_k_x = 0.05,
@@ -174,17 +174,17 @@ struct ConfigParam
 		int _seed = 0
 	)
 	{
-		T = _T;
-		step = _step;
+		ns = _ns;
+		nsps = _nsps;
 
 		ict = _ict;
 
-		nd = _nd;
+		ndps = _ndps;
 
 		e_1_alpha_x = _e_1_alpha_x;
-		e_1_tau = _e_1_tau;
-		e_1_f_in = _e_1_f_in;
 
+		e_1_2_f_in = _e_1_2_f_in;
+		e_1_2_tau = _e_1_2_tau;
 		e_1_2_k_pre = _e_1_2_k_pre;
 
 		e_2_alpha_I = _e_2_alpha_I;
@@ -197,7 +197,7 @@ struct ConfigParam
 		e_3_g_K = _e_3_g_K;
 		e_3_E_K = _e_3_E_K;
 		e_3_g_l = _e_3_g_l;
-		e_3_e_l = _e_3_e_l;
+		e_3_E_l = _e_3_E_l;
 		e_3_I_th = _e_3_I_th;
 		e_3_theta_x = _e_3_theta_x;
 		e_3_k_x = _e_3_k_x;

@@ -77,32 +77,32 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 		rp.max_num_seeds = atoi(val.c_str());
 	}
 
-	if (str.compare("T") == 0)
+	if (str.compare("ns") == 0)
 	{
-		cp.T = atof(val.c_str());
+		cp.ns = atoi(val.c_str());
 	}
-	if (str.compare("step") == 0)
+	if (str.compare("nsps") == 0)
 	{
-		cp.step = atof(val.c_str());
+		cp.nsps = atoi(val.c_str());
 	}
 	if (str.compare("ict") == 0)
 	{
 		cp.ict = atoi(val.c_str());
 	}
-	if (str.compare("nd") == 0)
+	if (str.compare("ndps") == 0)
 	{
-		cp.nd = atoi(val.c_str());
+		cp.ndps = atoi(val.c_str());
 	}
 
 	if (str.compare("e_1_alpha_x") == 0)
 	{
 		cp.e_1_alpha_x = atof(val.c_str());
 	}
-	if (str.compare("e_1_tau") == 0)
-	{
-		cp.e_1_tau = atof(val.c_str());
-	}
 
+	if (str.compare("e_1_2_tau") == 0)
+	{
+		cp.e_1_2_tau = atof(val.c_str());
+	}
 	if (str.compare("e_1_2_k_pre") == 0)
 	{
 		cp.e_1_2_k_pre = atof(val.c_str());
@@ -141,9 +141,9 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_3_g_l = atof(val.c_str());
 	}
-	if (str.compare("e_3_e_l") == 0)
+	if (str.compare("e_3_E_l") == 0)
 	{
-		cp.e_3_e_l = atof(val.c_str());
+		cp.e_3_E_l = atof(val.c_str());
 	}
 	if (str.compare("e_3_I_th") == 0)
 	{
@@ -268,14 +268,14 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "seed_num = " << rp.seed_num << endl;
 	cout << "max_num_seeds = " << rp.max_num_seeds << endl;
 
-	cout << "T = " << cp.T << endl;
-	cout << "step = " << cp.step << endl;
+	cout << "ns = " << cp.ns << endl;
+	cout << "nsps = " << cp.nsps << endl;
 	cout << "ict = " << cp.ict << endl;
-	cout << "nd = " << cp.nd << endl;
+	cout << "ndps = " << cp.ndps << endl;
 
 	cout << "e_1_alpha_x = " << cp.e_1_alpha_x << endl;
-	cout << "e_1_tau = " << cp.e_1_tau << endl;
 
+	cout << "e_1_2_tau = " << cp.e_1_2_tau << endl;
 	cout << "e_1_2_k_pre = " << cp.e_1_2_k_pre << endl;
 
 	cout << "e_2_alpha_I = " << cp.e_2_alpha_I << endl;
@@ -287,7 +287,7 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "e_3_g_K = " << cp.e_3_g_K << endl;
 	cout << "e_3_E_K = " << cp.e_3_E_K << endl;
 	cout << "e_3_g_l = " << cp.e_3_g_l << endl;
-	cout << "e_3_e_l = " << cp.e_3_e_l << endl;
+	cout << "e_3_E_l = " << cp.e_3_E_l << endl;
 	cout << "e_3_I_th = " << cp.e_3_I_th << endl;
 	cout << "e_3_theta_x = " << cp.e_3_theta_x << endl;
 	cout << "e_3_k_x = " << cp.e_3_k_x << endl;

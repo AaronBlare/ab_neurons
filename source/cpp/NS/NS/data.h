@@ -8,9 +8,14 @@ struct MainData
 
 	double time;			// Current integration time
 
-	double time_lim;		// Current time limit
+	double step;			// Integration step
+
+	int time_lim;			// Current time limit
 
 	double A;				// Current A
+
+	VSLStreamStatePtr stream_p;		// Stream for Poisson
+	VSLStreamStatePtr stream_w;		// Stream for Weibull
 
 	double * data;			// Integration data
 	double * args;			// Integration routines data
@@ -18,6 +23,12 @@ struct MainData
 	double * k2s;			// Integration routines data
 	double * k3s;			// Integration routines data
 	double * k4s;			// Integration routines data
+
+	int size_evo;			// Size of evo data
+	int curr_dump_id;		// Current dump id
+	double ** data_evo;		// Data evolution
+	double * time_evo;		// Time evolution
+	double * I_pre_evo;		// I_pre evolution
 
 	int num_lpn;			// Number of Lyapunov exponents
 
@@ -33,25 +44,13 @@ struct MainData
 };
 
 
-void init_main_data(ConfigParam &cp, MainData &md);
+void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md);
 
 void init_lpn_data(ConfigParam &cp, MainData &md);
-
-void init_cd_data(ConfigParam &cp, MainData &md);
-
-void init_cd_d_data(ConfigParam &cp, MainData &md);
-
-void init_cd_sd_data(ConfigParam &cp, MainData &md);
 
 void delete_main_data(MainData &dt);
 
 void delete_lpn_data(MainData &md);
-
-void delete_cd_data(MainData &md);
-
-void delete_cd_d_data(MainData &md);
-
-void delete_cd_sd_data(MainData &md);
 
 void init_cond(RunParam &rp, ConfigParam &cp, MainData &md);
 
@@ -66,6 +65,4 @@ void scalar_mult_lpn(MainData &md, double * mults, int lpn_id, int lpn_id_tmp);
 void sub_lpn(MainData &md, double* mults, int lpn_id, int lpn_id_tmp);
 
 void gsorth_lpn(MainData &md);
-
-void calc_ci(ConfigParam &cp, MainData &md);
 

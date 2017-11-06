@@ -152,11 +152,16 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="experiments.h" />
+    <ClInclude Include="integration.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="config.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="experiment.cpp" />
+    <ClCompile Include="integration.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

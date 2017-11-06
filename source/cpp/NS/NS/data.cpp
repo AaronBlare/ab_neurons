@@ -1,14 +1,22 @@
 #include "data.h"
 
-void init_main_data(ConfigParam &cp, MainData &md)
+void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md)
 {
 	md.size = 6;
 
 	md.time = 0.0;
 
-	md.time_lim = 0.0;
+	md.step = 1.0 / double(cp.nsps);
+
+	md.time_lim = 0;
 
 	md.A = 0.0;
+
+	vslNewStream(&(md.stream_p), VSL_BRNG_MCG31, 77778888);
+	vslLeapfrogStream(md.stream_p, cp.seed, rp.max_num_seeds);
+
+	vslNewStream(&(md.stream_w), VSL_BRNG_MCG31, 77778888);
+	vslLeapfrogStream(md.stream_w, cp.seed, rp.max_num_seeds);
 
 	md.data = new double[md.size];
 	md.args = new double[md.size];
@@ -16,6 +24,12 @@ void init_main_data(ConfigParam &cp, MainData &md)
 	md.k2s = new  double[md.size];
 	md.k3s = new  double[md.size];
 	md.k4s = new  double[md.size];
+
+	md.size_evo = cp.ns * cp.ndps + 1;
+	md.curr_dump_id = 0;
+	md.data_evo = new double* [md.size];
+	md.time_evo = new double[md.size_evo];
+	md.I_pre_evo = new double[md.size_evo];
 
 	for (int eq_id = 0; eq_id < md.size; eq_id++)
 	{
@@ -25,6 +39,18 @@ void init_main_data(ConfigParam &cp, MainData &md)
 		md.k2s[eq_id] = 0.0;
 		md.k3s[eq_id] = 0.0;
 		md.k4s[eq_id] = 0.0;
+
+		md.data_evo[eq_id] = new double[md.size_evo];
+		for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
+		{
+			md.data_evo[eq_id][dump_id] = 0.0;
+
+			if (eq_id == 0)
+			{
+				md.time_evo[dump_id] = 0.0;
+				md.I_pre_evo[dump_id] = 0.0;
+			}
+		}
 	}
 }
 
@@ -76,6 +102,14 @@ void delete_main_data(MainData &md)
 	delete_data(md.k2s);
 	delete_data(md.k3s);
 	delete_data(md.k4s);
+
+	for (int eq_id = 0; eq_id < md.size; eq_id++)
+	{
+		delete[] md.data_evo[eq_id];
+	}
+	delete[] md.data_evo;
+	delete[] md.time_evo;
+	delete[] md.I_pre_evo;
 }
 
 void delete_lpn_data(MainData &md)
@@ -104,23 +138,29 @@ void delete_lpn_data(MainData &md)
 
 void init_cond(RunParam &rp, ConfigParam &cp, MainData &md)
 {
-	double left_border = -PI;
-	double right_border = PI;
-	int max_num_seeds = rp.max_num_seeds;
-
-	VSLStreamStatePtr stream;
-	vslNewStream(&stream, VSL_BRNG_MCG31, 77778888);
-	vslLeapfrogStream(stream, cp.seed, max_num_seeds);
-	vdRngUniform(VSL_RNG_METHOD_UNIFORM_STD, stream, md.size, md.data, left_border, right_border);
-
+	md.data[0] = 0.0;
+	md.data[1] = 0.0;
 	md.data[2] = 0.0;
+	md.data[3] = 0.0;
+	md.data[4] = 0.0;
+	md.data[5] = 0.0;
+
+	md.time_evo[md.curr_dump_id] = md.time;
+	md.I_pre_evo[md.curr_dump_id] = 0;
+
+	for (int eq_id = 0; eq_id < md.size; eq_id++)
+	{
+		md.data_evo[eq_id][md.curr_dump_id] = md.data[eq_id];
+	}
+
+	md.curr_dump_id++;
 }
 
 void init_cond_lpn(ConfigParam &cp, MainData &md)
 {
-	for (int lpn_st_id = 0; lpn_st_id < md.num_lpn; lpn_st_id++)
+	for (int lpn_id = 0; lpn_id < md.num_lpn; lpn_id++)
 	{
-		md.data_lpn[lpn_st_id][lpn_st_id] = 1.0;
+		md.data_lpn[lpn_id][lpn_id] = 1.0;
 	}
 }
 
@@ -138,25 +178,25 @@ void calc_norm_lpn(MainData &md, int lpn_id)
 
 void normalization_lpn(MainData &md, int lpn_id)
 {
-	for (int st_id = 0; st_id < md.size; st_id++)
+	for (int eq_id = 0; eq_id < md.size; eq_id++)
 	{
-		md.data_lpn[lpn_id][st_id] = md.data_lpn[lpn_id][st_id] / md.norms_lpn[lpn_id];
+		md.data_lpn[lpn_id][eq_id] = md.data_lpn[lpn_id][eq_id] / md.norms_lpn[lpn_id];
 	}
 }
 
 void scalar_mult_lpn(MainData &md, double * mults, int lpn_id, int lpn_id_tmp)
 {
-	for (int st_id = 0; st_id < md.size; st_id++)
+	for (int eq_id = 0; eq_id < md.size; eq_id++)
 	{
-		mults[lpn_id_tmp] += md.data_lpn[lpn_id][st_id] * md.data_lpn[lpn_id_tmp][st_id];
+		mults[lpn_id_tmp] += md.data_lpn[lpn_id][eq_id] * md.data_lpn[lpn_id_tmp][eq_id];
 	}
 }
 
 void sub_lpn(MainData &md, double* mults, int lpn_id, int lpn_id_tmp)
 {
-	for (int st_id = 0; st_id < md.size; st_id++)
+	for (int eq_id = 0; eq_id < md.size; eq_id++)
 	{
-		md.data_lpn[lpn_id][st_id] -= mults[lpn_id_tmp] * md.data_lpn[lpn_id_tmp][st_id];
+		md.data_lpn[lpn_id][eq_id] -= mults[lpn_id_tmp] * md.data_lpn[lpn_id_tmp][eq_id];
 	}
 }
 
@@ -202,40 +242,5 @@ void gsorth_lpn(MainData &md)
 		md.rvm_lpn[lpn_id] += log(md.norms_lpn[lpn_id]);
 		md.exps_lpn[lpn_id] = md.rvm_lpn[lpn_id] / md.time;
 	}
-}
-
-void calc_ci(ConfigParam &cp, MainData &md)
-{
-	double * curr_diff = new double[md.cd_size];
-	double curr_norm = 0.0;
-
-	double integral = 0.0;
-
-	for (int cd_p_id_1 = 0; cd_p_id_1 < md.cd_M; cd_p_id_1++)
-	{
-		for (int cd_p_id_2 = 0; cd_p_id_2 < md.cd_M; cd_p_id_2++)
-		{
-			if (cd_p_id_1 != cd_p_id_2)
-			{
-				for (int cd_st_id = 0; cd_st_id < md.cd_size; cd_st_id++)
-				{
-					curr_diff[cd_st_id] = md.cd_rd[cd_p_id_1][cd_st_id] - md.cd_rd[cd_p_id_2][cd_st_id];
-				}
-
-				curr_norm = calc_norm(curr_diff, md.cd_size);
-
-				if (curr_norm < cp.cd_eps)
-				{
-					integral += 1.0;
-				}
-			}
-		}
-	}
-
-	integral /= (double(md.cd_M) * double(md.cd_M - 1));
-
-	md.cd_ci = integral;
-
-	delete curr_diff;
 }
 
