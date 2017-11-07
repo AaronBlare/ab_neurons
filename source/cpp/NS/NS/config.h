@@ -87,7 +87,7 @@ struct ConfigParam
 
 	double e_1_2_f_in;
 	double e_1_2_tau;
-	double e_1_2_k_pre;
+	double e_1_k_pre;
 	
 	double e_2_alpha_I;
 	double e_2_b;
@@ -133,10 +133,10 @@ struct ConfigParam
 		int _ndps = 1,
 
 		double _e_1_alpha_x = 0.05,
+		double _e_1_k_pre = 1.0,
 
 		double _e_1_2_f_in = 0.5,
 		double _e_1_2_tau = 1.0,
-		double _e_1_2_k_pre = 1.0,
 
 		double _e_2_alpha_I = 0.1,
 		double _e_2_b = 5.0,
@@ -182,11 +182,11 @@ struct ConfigParam
 		ndps = _ndps;
 
 		e_1_alpha_x = _e_1_alpha_x;
+		e_1_k_pre = _e_1_k_pre;
 
 		e_1_2_f_in = _e_1_2_f_in;
 		e_1_2_tau = _e_1_2_tau;
-		e_1_2_k_pre = _e_1_2_k_pre;
-
+		
 		e_2_alpha_I = _e_2_alpha_I;
 		e_2_b = _e_2_b;
 		e_2_A = _e_2_A;

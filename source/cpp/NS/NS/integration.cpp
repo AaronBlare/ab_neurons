@@ -2,7 +2,7 @@
 
 void right_part(ConfigParam &cp, MainData &md, double * ks, double * x, double time, double impulse)
 {
-	ks[0] = -cp.e_1_alpha_x * (x[0] - cp.e_1_2_k_pre * impulse);
+	ks[0] = -cp.e_1_alpha_x * (x[0] - cp.e_1_k_pre * impulse);
 
 	ks[1] = cp.e_2_alpha_I * (x[1] - md.A * impulse);
 

@@ -13,8 +13,8 @@ ns 100
 nsps 1000
 ndps 10
 e_1_alpha_x 0.05
+e_1_k_pre 1.0
 e_1_2_tau 1.0
-e_1_2_k_pre 1.0
 e_2_alpha_I 0.1
 e_2_A 5.0
 e_3_c 1.0

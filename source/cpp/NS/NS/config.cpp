@@ -98,14 +98,14 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_1_alpha_x = atof(val.c_str());
 	}
+	if (str.compare("e_1_k_pre") == 0)
+	{
+		cp.e_1_k_pre = atof(val.c_str());
+	}
 
 	if (str.compare("e_1_2_tau") == 0)
 	{
 		cp.e_1_2_tau = atof(val.c_str());
-	}
-	if (str.compare("e_1_2_k_pre") == 0)
-	{
-		cp.e_1_2_k_pre = atof(val.c_str());
 	}
 
 	if (str.compare("e_2_alpha_I") == 0)
@@ -274,10 +274,10 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "ndps = " << cp.ndps << endl;
 
 	cout << "e_1_alpha_x = " << cp.e_1_alpha_x << endl;
+	cout << "e_1_k_pre = " << cp.e_1_k_pre << endl;
 
 	cout << "e_1_2_tau = " << cp.e_1_2_tau << endl;
-	cout << "e_1_2_k_pre = " << cp.e_1_2_k_pre << endl;
-
+	
 	cout << "e_2_alpha_I = " << cp.e_2_alpha_I << endl;
 	cout << "e_2_A = " << cp.e_2_A << endl;
 
