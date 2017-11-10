@@ -16,17 +16,17 @@ fn = sprintf('%s/time_%s.txt', ...
     suffix);
 time = importdata(fn);
 
-fn = sprintf('%s/I_pre_%s.txt', ...
+fn = sprintf('%s/data_%s.txt', ...
     data_path, ...
     suffix);
-I_pre = importdata(fn);
+data = importdata(fn);
+
+Vs = data(:, 3);
 
 fig = figure;
-hLine = plot(time, I_pre);
+hLine = plot(time, Vs);
 set(gca, 'FontSize', 30);
 xlabel('$t$', 'Interpreter', 'latex');
 set(gca, 'FontSize', 30);
-ylabel('$I_{pre}$', 'Interpreter', 'latex');
-ylim([-0.25 1.25])
+ylabel('$V$', 'Interpreter', 'latex');
 propertyeditor('on')
-

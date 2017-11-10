@@ -4,7 +4,7 @@ void right_part(ConfigParam &cp, MainData &md, double * ks, double * x, double t
 {
 	ks[0] = -cp.e_1_alpha_x * (x[0] - cp.e_1_k_pre * impulse);
 
-	ks[1] = cp.e_2_alpha_I * (x[1] - md.A * impulse);
+	ks[1] = cp.e_2_alpha_I * (-x[1] - md.A * impulse);
 
 	double I_Na = cp.e_3_g_Na * std::pow(x[4], 3.0) * x[5] * (x[2] - cp.e_3_E_Na);
 	double I_K = cp.e_3_g_K * std::pow(x[3], 4.0) * (x[2] - cp.e_3_E_K);

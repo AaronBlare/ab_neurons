@@ -34,3 +34,9 @@
 *.txt
 
 *.tlog
+
+*.pdb
+
+*.opendb
+
+*.ilk
