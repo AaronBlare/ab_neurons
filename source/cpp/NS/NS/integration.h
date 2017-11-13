@@ -11,6 +11,6 @@ void rk_final(int size, double * x, double * k1s, double * k2s, double * k3s, do
 
 void rk_step(ConfigParam &cp, MainData &md, double impulse);
 
-void propagation(ConfigParam &cp, MainData &md);
+void propagation(RunParam &rp, ConfigParam &cp, MainData &md);
 
-void int_second(ConfigParam &cp, MainData &md, int sec_id, double impulse);
+void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse);

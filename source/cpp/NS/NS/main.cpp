@@ -16,7 +16,7 @@ int main(int argc, char ** argv)
 
 	double time = omp_get_wtime();
 
-	if (rp.task == BASIC_EXP_ID)
+	if (rp.task == BASIC_EXP_ID || rp.task == LONG_EXP_ID)
 	{
 		basic_exp(rp, cp);
 	}

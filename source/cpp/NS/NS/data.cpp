@@ -25,7 +25,23 @@ void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md)
 	md.k3s = new  double[md.size];
 	md.k4s = new  double[md.size];
 
-	md.size_evo = cp.ns * cp.ndps + 1;
+	if (rp.task == LONG_EXP_ID)
+	{
+		md.size_evo = cp.nd + 1;
+		md.dump_shift = cp.ns / cp.nd;
+	}
+	else if (rp.task == BASIC_EXP_ID)
+	{
+		md.size_evo = cp.ns * cp.nd + 1;
+		md.dump_shift = cp.nsps / cp.nd;
+	}
+	else 
+	{
+		stringstream msg;
+		msg << "Wrong task value: " << rp.task << endl;
+		Error(msg.str());
+	}
+	
 	md.curr_dump_id = 0;
 	md.data_evo = new double* [md.size];
 	md.time_evo = new double[md.size_evo];

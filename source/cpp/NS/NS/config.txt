@@ -1,17 +1,17 @@
-task 0
+task 1
 path
-f_in_start 5.0
+f_in_start 200.0
 f_in_shift 0.1
 f_in_num 1
-b_start 25.0
+b_start 5.0
 b_shift 1.0
 b_num 1
-seed_start 0
+seed_start 1337
 seed_num 1
 max_num_seeds 1000000
-ns 100
+ns 60000
 nsps 1000
-ndps 10
+nd 1000
 e_1_alpha_x 0.05
 e_1_k_pre 1.0
 e_1_2_tau 1.0

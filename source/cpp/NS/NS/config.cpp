@@ -89,9 +89,9 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.ict = atoi(val.c_str());
 	}
-	if (str.compare("ndps") == 0)
+	if (str.compare("nd") == 0)
 	{
-		cp.ndps = atoi(val.c_str());
+		cp.nd = atoi(val.c_str());
 	}
 
 	if (str.compare("e_1_alpha_x") == 0)
@@ -271,7 +271,7 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "ns = " << cp.ns << endl;
 	cout << "nsps = " << cp.nsps << endl;
 	cout << "ict = " << cp.ict << endl;
-	cout << "ndps = " << cp.ndps << endl;
+	cout << "nd = " << cp.nd << endl;
 
 	cout << "e_1_alpha_x = " << cp.e_1_alpha_x << endl;
 	cout << "e_1_k_pre = " << cp.e_1_k_pre << endl;

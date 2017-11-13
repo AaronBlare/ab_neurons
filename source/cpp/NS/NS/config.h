@@ -17,6 +17,7 @@
 #define EPS 1.0e-14
 
 #define BASIC_EXP_ID 0
+#define LONG_EXP_ID 1
 
 using namespace std;
 
@@ -81,7 +82,7 @@ struct ConfigParam
 
 	int ict;
 
-	int ndps;
+	int nd;
 
 	double e_1_alpha_x;
 
@@ -130,7 +131,7 @@ struct ConfigParam
 
 		int _ict = 0,
 
-		int _ndps = 1,
+		int _nd = 1,
 
 		double _e_1_alpha_x = 0.05,
 		double _e_1_k_pre = 1.0,
@@ -179,7 +180,7 @@ struct ConfigParam
 
 		ict = _ict;
 
-		ndps = _ndps;
+		nd = _nd;
 
 		e_1_alpha_x = _e_1_alpha_x;
 		e_1_k_pre = _e_1_k_pre;

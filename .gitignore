@@ -40,3 +40,9 @@
 *.opendb
 
 *.ilk
+
+source/cpp/NS/\.vs/NS/v14/\.suo
+
+*.db
+
+*.log

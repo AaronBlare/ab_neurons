@@ -27,7 +27,7 @@ void basic_exp(RunParam &rp, ConfigParam &cp)
 				init_main_data(rp, cp, md);
 				init_cond(rp, cp, md);
 
-				propagation(cp, md);
+				propagation(rp, cp, md);
 
 				write_2d_double_data(fn_data, md.data_evo, md.size, md.size_evo, 16, 0);
 				write_double_data(fn_time, md.time_evo, md.size_evo, 16, 0);

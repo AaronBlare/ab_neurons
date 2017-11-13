@@ -63,7 +63,7 @@ void rk_step(ConfigParam &cp, MainData &md, double impulse)
 	rk_final(md.size, md.data, md.k1s, md.k2s, md.k3s, md.k4s, md.step);
 }
 
-void propagation(ConfigParam &cp, MainData &md)
+void propagation(RunParam &rp, ConfigParam &cp, MainData &md)
 {
 	viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md.stream_p, 1, &(md.time_lim), cp.e_1_2_f_in);
 
@@ -77,7 +77,7 @@ void propagation(ConfigParam &cp, MainData &md)
 	{
 		for (int sec_id = 0; sec_id < md.time_lim; sec_id++)
 		{
-			int_second(cp, md, sec_id, impulse);
+			int_second(rp, cp, md, sec_id, impulse);
 		}
 		
 		curr_sec_id = md.time_lim;
@@ -101,7 +101,7 @@ void propagation(ConfigParam &cp, MainData &md)
 			impulse = 1.0;
 			for (int sec_id = curr_sec_id; sec_id < min(curr_sec_id + curr_sec_window, cp.ns); sec_id++)
 			{
-				int_second(cp, md, sec_id, impulse);
+				int_second(rp, cp, md, sec_id, impulse);
 			}
 
 			curr_sec_id += curr_sec_window;
@@ -109,7 +109,7 @@ void propagation(ConfigParam &cp, MainData &md)
 			impulse = 0.0;
 			for (int sec_id = curr_sec_id; sec_id < min(lim_sec_id, cp.ns); sec_id++)
 			{
-				int_second(cp, md, sec_id, impulse);
+				int_second(rp, cp, md, sec_id, impulse);
 			}
 
 			curr_sec_id += lim_sec_id - curr_sec_id;
@@ -119,24 +119,43 @@ void propagation(ConfigParam &cp, MainData &md)
 	{
 		for (int sec_id = 0; sec_id < cp.ns; sec_id++)
 		{
-			int_second(cp, md, sec_id, impulse);
+			int_second(rp, cp, md, sec_id, impulse);
 		}
 	}
 
 }
 
-void int_second(ConfigParam &cp, MainData &md, int sec_id, double impulse)
+void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse)
 {
-	int dump_shift = cp.nsps / cp.ndps;
-
 	for (int step_id = 0; step_id < cp.nsps; step_id++)
 	{
 		md.time = double(sec_id) + double(step_id) * md.step;
 		rk_step(cp, md, impulse);
 		md.time = double(sec_id) + double(step_id + 1) * md.step;
 
-		if (step_id % dump_shift == 0)
+		if (rp.task == BASIC_EXP_ID)
 		{
+			if (step_id % md.dump_shift == 0)
+			{
+				md.time_evo[md.curr_dump_id] = md.time;
+				md.I_pre_evo[md.curr_dump_id] = impulse;
+
+				for (int eq_id = 0; eq_id < md.size; eq_id++)
+				{
+					md.data_evo[eq_id][md.curr_dump_id] = md.data[eq_id];
+				}
+
+				md.curr_dump_id++;
+			}
+		}	
+	}
+
+	if (rp.task == LONG_EXP_ID)
+	{
+		if (sec_id % md.dump_shift == 0)
+		{
+			cout << "ms: " << (sec_id + 1) << endl;
+
 			md.time_evo[md.curr_dump_id] = md.time;
 			md.I_pre_evo[md.curr_dump_id] = impulse;
 
@@ -145,7 +164,7 @@ void int_second(ConfigParam &cp, MainData &md, int sec_id, double impulse)
 				md.data_evo[eq_id][md.curr_dump_id] = md.data[eq_id];
 			}
 
-			md.curr_dump_id++;	
+			md.curr_dump_id++;
 		}
 	}
 }

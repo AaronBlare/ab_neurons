@@ -30,6 +30,8 @@ struct MainData
 	double * time_evo;		// Time evolution
 	double * I_pre_evo;		// I_pre evolution
 
+	int dump_shift;			// Dump shift
+
 	int num_lpn;			// Number of Lyapunov exponents
 
 	double ** data_lpn;		// Data for Lyapunov exps
