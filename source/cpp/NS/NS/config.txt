@@ -11,7 +11,7 @@ seed_num 1
 max_num_seeds 1000000
 ns 60000
 nsps 1000
-nd 1000
+nd 6000
 e_1_alpha_x 0.05
 e_1_k_pre 1.0
 e_1_2_tau 1.0
