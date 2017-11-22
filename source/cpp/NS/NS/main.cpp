@@ -20,6 +20,10 @@ int main(int argc, char ** argv)
 	{
 		basic_exp(rp, cp);
 	}
+	else if (rp.task == WEIBULL_EXP_ID)
+	{
+		weibull_exp(rp, cp);
+	}
 	else
 	{
 		stringstream msg;

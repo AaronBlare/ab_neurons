@@ -125,6 +125,15 @@ void propagation(RunParam &rp, ConfigParam &cp, MainData &md)
 
 }
 
+void weibull_dist(RunParam &rp, ConfigParam &cp, MainData &md)
+{
+	for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
+	{
+		vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md.stream_w, 1, &(md.A), 2.0, 0.0, cp.e_2_b);
+		md.A_evo[dump_id] = md.A;
+	}
+}
+
 void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse)
 {
 	for (int step_id = 0; step_id < cp.nsps; step_id++)

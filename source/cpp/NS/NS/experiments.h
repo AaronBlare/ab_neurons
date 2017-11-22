@@ -5,3 +5,5 @@
 #include "integration.h"
 
 void basic_exp(RunParam &rp, ConfigParam &cp);
+
+void weibull_exp(RunParam &rp, ConfigParam &cp);

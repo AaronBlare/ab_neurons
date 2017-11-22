@@ -29,6 +29,7 @@ struct MainData
 	double ** data_evo;		// Data evolution
 	double * time_evo;		// Time evolution
 	double * I_pre_evo;		// I_pre evolution
+	double * A_evo;			// A evolution
 
 	int dump_shift;			// Dump shift
 
@@ -48,9 +49,13 @@ struct MainData
 
 void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md);
 
+void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md);
+
 void init_lpn_data(ConfigParam &cp, MainData &md);
 
 void delete_main_data(MainData &dt);
+
+void delete_weibull_data(MainData &dt);
 
 void delete_lpn_data(MainData &md);
 

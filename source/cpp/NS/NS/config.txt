@@ -1,9 +1,9 @@
-task 1
+task 2
 path
 f_in_start 200.0
 f_in_shift 0.1
 f_in_num 1
-b_start 5.0
+b_start 25.0
 b_shift 1.0
 b_num 1
 seed_start 1337
