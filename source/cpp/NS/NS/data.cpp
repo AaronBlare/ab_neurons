@@ -70,6 +70,36 @@ void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md)
 	}
 }
 
+void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md)
+{
+	md.size = 6;
+
+	md.time = 0.0;
+
+	md.step = 1.0 / double(cp.nsps);
+
+	md.time_lim = 0;
+
+	md.A = 0.0;
+
+	vslNewStream(&(md.stream_p), VSL_BRNG_MCG31, 77778888);
+	vslLeapfrogStream(md.stream_p, cp.seed, rp.max_num_seeds);
+
+	vslNewStream(&(md.stream_w), VSL_BRNG_MCG31, 77778888);
+	vslLeapfrogStream(md.stream_w, cp.seed, rp.max_num_seeds);
+
+	md.size_evo = cp.nd + 1;
+	md.dump_shift = cp.ns / cp.nd;
+	
+	md.curr_dump_id = 0;
+
+	md.A_evo = new double[md.size_evo];
+	for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
+	{
+		md.A_evo[dump_id] = 0.0;
+	}
+}
+
 void init_lpn_data(ConfigParam &cp, MainData &md)
 {
 	md.num_lpn = md.size;
@@ -126,6 +156,11 @@ void delete_main_data(MainData &md)
 	delete[] md.data_evo;
 	delete[] md.time_evo;
 	delete[] md.I_pre_evo;
+}
+
+void delete_weibull_data(MainData &md)
+{
+	delete[] md.A_evo;
 }
 
 void delete_lpn_data(MainData &md)
