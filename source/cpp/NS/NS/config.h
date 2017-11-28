@@ -111,18 +111,19 @@ struct ConfigParam
 	double e_4_alpha_a3;
 	double e_4_beta_b1;
 	double e_4_beta_b2;
+	double e_4_beta_b3;
 
 	double e_5_alpha_a1;
 	double e_5_alpha_a2;
-	double e_5_alpha_a3;
 	double e_5_beta_b1;
 	double e_5_beta_b2;
+	double e_5_beta_b3;
 
 	double e_6_alpha_a1;
 	double e_6_alpha_a2;
+	double e_6_alpha_a3;
 	double e_6_beta_b1;
 	double e_6_beta_b2;
-	double e_6_beta_b3;
 
 	int seed;
 
@@ -146,32 +147,33 @@ struct ConfigParam
 
 		double _e_3_c = 1.0,
 		double _e_3_g_Na = 120.0,
-		double _e_3_E_Na = 120.0,
+		double _e_3_E_Na = 50.0,
 		double _e_3_g_K = 36.0,
-		double _e_3_E_K = -12.0,
+		double _e_3_E_K = -77.0,
 		double _e_3_g_l = 0.3,
-		double _e_3_E_l = 10.6,
-		double _e_3_I_th = 5.5,
+		double _e_3_E_l = -54.4,
+		double _e_3_I_th = 8.0,
 		double _e_3_theta_x = 0.35,
 		double _e_3_k_x = 0.05,
 
 		double _e_4_alpha_a1 = 0.01,
-		double _e_4_alpha_a2 = 10.0,
-		double _e_4_alpha_a3 = 10.0,
+		double _e_4_alpha_a2 = 55.0,
+		double _e_4_alpha_a3 = 0.1,
 		double _e_4_beta_b1 = 0.125,
-		double _e_4_beta_b2 = 80.0,
+		double _e_4_beta_b2 = 65.0,
+		double _e_4_beta_b3 = 80.0,
 
 		double _e_5_alpha_a1 = 0.1,
-		double _e_5_alpha_a2 = 25.0,
-		double _e_5_alpha_a3 = 10.0,
+		double _e_5_alpha_a2 = 40.0,
 		double _e_5_beta_b1 = 4.0,
-		double _e_5_beta_b2 = 18.0,
+		double _e_5_beta_b2 = 65.0,
+		double _e_5_beta_b3 = 18.0,
 
 		double _e_6_alpha_a1 = 0.07,
-		double _e_6_alpha_a2 = 20.0,
-		double _e_6_beta_b1 = 1.0,
-		double _e_6_beta_b2 = 30.0,
-		double _e_6_beta_b3 = 10.0,
+		double _e_6_alpha_a2 = 0.05,
+		double _e_6_alpha_a3 = 65.0,
+		double _e_6_beta_b1 = 0.1,
+		double _e_6_beta_b2 = 35.0,
 
 		int _seed = 0
 	)
@@ -209,18 +211,19 @@ struct ConfigParam
 		e_4_alpha_a3 = _e_4_alpha_a3;
 		e_4_beta_b1 = _e_4_beta_b1;
 		e_4_beta_b2 = _e_4_beta_b2;
+		e_4_beta_b3 = _e_4_beta_b3;
 
 		e_5_alpha_a1 = _e_5_alpha_a1;
 		e_5_alpha_a2 = _e_5_alpha_a2;
-		e_5_alpha_a3 = _e_5_alpha_a3;
 		e_5_beta_b1 = _e_5_beta_b1;
 		e_5_beta_b2 = _e_5_beta_b2;
+		e_5_beta_b3 = _e_5_beta_b3;
 
 		e_6_alpha_a1 = _e_6_alpha_a1;
 		e_6_alpha_a2 = _e_6_alpha_a2;
+		e_6_alpha_a3 = _e_6_alpha_a3;
 		e_6_beta_b1 = _e_6_beta_b1;
 		e_6_beta_b2 = _e_6_beta_b2;
-		e_6_beta_b3 = _e_6_beta_b3;
 
 		seed = _seed;
 	}
