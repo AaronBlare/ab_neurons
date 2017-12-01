@@ -3,8 +3,8 @@ clear all;
 data_path = '../../source/cpp/NS/NS';
 
 fin = 5.0;
-b = 25.0;
-seed = 0;
+b = 5.0;
+seed = 111;
 
 suffix = sprintf('fin(%0.4f)_b(%0.4f)_seed(%d)', ...
     fin, ...

@@ -4,9 +4,9 @@ data_path = '../../source/cpp/NS/NS';
 
 fin = 200.0;
 b = 5.0;
-seed = 1337;
+seed = 111;
 
-num_bins = 30;
+num_bins = 50;
 
 suffix = sprintf('fin(%0.4f)_b(%0.4f)_seed(%d)', ...
     fin, ...
@@ -19,9 +19,7 @@ fn = sprintf('%s/A_%s.txt', ...
 A = importdata(fn);
 
 fig = figure;
-h = hist(A, num_bins);
-h = h/sum(h);
-hLine = bar(h);
+h = histogram(A, num_bins, 'Normalization','probability');
 set(gca, 'FontSize', 30);
 xlabel('$A$', 'Interpreter', 'latex');
 set(gca, 'FontSize', 30);

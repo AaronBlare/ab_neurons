@@ -178,6 +178,10 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_4_beta_b2 = atof(val.c_str());
 	}
+	if (str.compare("e_4_beta_b3") == 0)
+	{
+		cp.e_4_beta_b3 = atof(val.c_str());
+	}
 
 	if (str.compare("e_5_alpha_a1") == 0)
 	{
@@ -187,10 +191,6 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_5_alpha_a2 = atof(val.c_str());
 	}
-	if (str.compare("e_5_alpha_a3") == 0)
-	{
-		cp.e_5_alpha_a3 = atof(val.c_str());
-	}
 	if (str.compare("e_5_beta_b1") == 0)
 	{
 		cp.e_5_beta_b1 = atof(val.c_str());
@@ -198,6 +198,10 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	if (str.compare("e_5_beta_b2") == 0)
 	{
 		cp.e_5_beta_b2 = atof(val.c_str());
+	}
+	if (str.compare("e_5_beta_b3") == 0)
+	{
+		cp.e_5_beta_b3 = atof(val.c_str());
 	}
 
 	if (str.compare("e_6_alpha_a1") == 0)
@@ -208,6 +212,10 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_6_alpha_a2 = atof(val.c_str());
 	}
+	if (str.compare("e_6_alpha_a3") == 0)
+	{
+		cp.e_6_alpha_a3 = atof(val.c_str());
+	}
 	if (str.compare("e_6_beta_b1") == 0)
 	{
 		cp.e_6_beta_b1 = atof(val.c_str());
@@ -215,10 +223,6 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	if (str.compare("e_6_beta_b2") == 0)
 	{
 		cp.e_6_beta_b2 = atof(val.c_str());
-	}
-	if (str.compare("e_6_beta_b3") == 0)
-	{
-		cp.e_6_beta_b3 = atof(val.c_str());
 	}
 }
 
@@ -297,18 +301,19 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "e_4_alpha_a3 = " << cp.e_4_alpha_a3 << endl;
 	cout << "e_4_beta_b1 = " << cp.e_4_beta_b1 << endl;
 	cout << "e_4_beta_b2 = " << cp.e_4_beta_b2 << endl;
+	cout << "e_4_beta_b3 = " << cp.e_4_beta_b3 << endl;
 
 	cout << "e_5_alpha_a1 = " << cp.e_5_alpha_a1 << endl;
 	cout << "e_5_alpha_a2 = " << cp.e_5_alpha_a2 << endl;
-	cout << "e_5_alpha_a3 = " << cp.e_5_alpha_a3 << endl;
 	cout << "e_5_beta_b1 = " << cp.e_5_beta_b1 << endl;
 	cout << "e_5_beta_b2 = " << cp.e_5_beta_b2 << endl;
+	cout << "e_5_beta_b3 = " << cp.e_5_beta_b3 << endl;
 
 	cout << "e_6_alpha_a1 = " << cp.e_6_alpha_a1 << endl;
-	cout << "e_6_alpha_a2 = " << cp.e_5_alpha_a2 << endl;
+	cout << "e_6_alpha_a2 = " << cp.e_6_alpha_a2 << endl;
+	cout << "e_6_alpha_a3 = " << cp.e_6_alpha_a3 << endl;
 	cout << "e_6_beta_b1 = " << cp.e_6_beta_b1 << endl;
 	cout << "e_6_beta_b2 = " << cp.e_6_beta_b2 << endl;
-	cout << "e_6_beta_b3 = " << cp.e_6_beta_b3 << endl;
 
 	cout << "######################################" << endl;
 }
