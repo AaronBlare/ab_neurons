@@ -16,3 +16,5 @@ void propagation(RunParam &rp, ConfigParam &cp, MainData &md);
 void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse);
 
 void weibull_dist(RunParam &rp, ConfigParam &cp, MainData &md);
+
+void calc_f_out(RunParam &rp, ConfigParam &cp, MainData &md);

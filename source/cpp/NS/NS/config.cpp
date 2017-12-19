@@ -94,6 +94,11 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 		cp.nd = atoi(val.c_str());
 	}
 
+	if (str.compare("thr_Vpost") == 0)
+	{
+		cp.thr_Vpost = atof(val.c_str());
+	}
+
 	if (str.compare("e_1_alpha_x") == 0)
 	{
 		cp.e_1_alpha_x = atof(val.c_str());
@@ -276,6 +281,8 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "nsps = " << cp.nsps << endl;
 	cout << "ict = " << cp.ict << endl;
 	cout << "nd = " << cp.nd << endl;
+
+	cout << "thr_Vpost = " << cp.thr_Vpost << endl;
 
 	cout << "e_1_alpha_x = " << cp.e_1_alpha_x << endl;
 	cout << "e_1_k_pre = " << cp.e_1_k_pre << endl;

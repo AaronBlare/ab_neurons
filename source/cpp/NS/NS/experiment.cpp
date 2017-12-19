@@ -33,6 +33,10 @@ void basic_exp(RunParam &rp, ConfigParam &cp)
 				write_double_data(fn_time, md.time_evo, md.size_evo, 16, 0);
 				write_double_data(fn_I_pre, md.I_pre_evo, md.size_evo, 16, 0);
 
+				calc_f_out(rp, cp, md);
+				string fn_f_out = rp.path + "f_out" + file_name_suffix(rp, cp, 4);
+				write_double_data(fn_f_out, &(md.f_out), 1, 16, 0);
+
 				delete_main_data(md);
 			}
 		}

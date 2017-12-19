@@ -2,12 +2,12 @@ clear all;
 
 data_path = '../../source/cpp/NS/NS';
 
-f_in_start = 1.0;
+f_in_start = 5.0;
 f_in_shift = 1.0;
-f_in_num = 10;
+f_in_num = 1;
 
 b = 5.0;
-seed = 111;
+seed = 0;
 
 f_out_threshold = 0.0;
 f_out = zeros;

@@ -33,6 +33,10 @@ struct MainData
 
 	int dump_shift;			// Dump shift
 
+	int curr_Vpost_status;		// Current status of Vpost
+	int num_thr_cross_Vpost;	// Total number of crossings
+	double f_out;				// f_out
+
 	int num_lpn;			// Number of Lyapunov exponents
 
 	double ** data_lpn;		// Data for Lyapunov exps

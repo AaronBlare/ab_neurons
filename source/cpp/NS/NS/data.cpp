@@ -68,6 +68,11 @@ void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md)
 			}
 		}
 	}
+
+	md.curr_Vpost_status = 0;
+	md.num_thr_cross_Vpost = 0;
+
+	md.f_out = 0.0;
 }
 
 void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md)
