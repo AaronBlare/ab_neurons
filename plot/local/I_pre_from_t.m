@@ -2,7 +2,7 @@ clear all;
 
 data_path = '../../source/cpp/NS/NS';
 
-fin = 5.0;
+fin = 10.0;
 b = 5.0;
 seed = 111;
 
