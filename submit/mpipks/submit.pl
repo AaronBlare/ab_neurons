@@ -9,7 +9,7 @@ $data_path = "/data/biophys/yusipov/ab_neurons";
 
 $PI = 3.1415926535897932384626433832795;
 
-for($f_in_Hz = 1.0; $f_in_Hz <= 1.01; $f_in_Hz += 1.0)
+for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 {
 	print "f_in_Hz = $f_in_Hz\n";
 	
@@ -26,7 +26,7 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1.01; $f_in_Hz += 1.0)
 	$seed_start = 0;
 	$seed_num = 1;
 	$max_num_seeds = 1000000;
-	$ns = 100000;
+	$ns = 5400000;
 	$nsps  = 1000;
 	$nd = 10;
 	$thr_Vpost = 0.0;
@@ -151,7 +151,7 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1.01; $f_in_Hz += 1.0)
 		
 		close WF;
 
-		$test_file = sprintf('%s/f_out_fin(%0.4f)_b(%0.4f)_seed(%d).txt', $f_in_start, $b_start, $i);
+		$test_file = sprintf('%s/f_out_fin(%0.4f)_b(%0.4f)_seed(%d).txt', $key, $f_in_start, $b_start, $i);
 			
 		unless (-e "$test_file")
 		{	
