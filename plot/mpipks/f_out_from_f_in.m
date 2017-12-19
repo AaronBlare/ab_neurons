@@ -28,7 +28,7 @@ f_outs = zeros(f_inv_num, 1);
 
 for f_in_inv_id = 1:f_inv_num
     
-    f_in_inv = f_inv_start + (f_in_inv_id - 1) * f_inv_shift;
+    f_in_inv = f_inv_start + (f_in_inv_id - 1) * f_inv_shift
     f_in = 1000 / f_in_inv;
     
     f_in_invs(f_in_inv_id) = f_in_inv;
@@ -63,7 +63,7 @@ for f_in_inv_id = 1:f_inv_num
 end
 
 fig = figure;
-hLine = plot(f_in_invs, f_outs, 'LineWitdh', 2);
+hLine = plot(f_in_invs, f_outs);
 set(gca, 'FontSize', 30);
 xlabel('$f_{in}$', 'Interpreter', 'latex');
 set(gca, 'FontSize', 30);
