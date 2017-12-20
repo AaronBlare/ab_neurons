@@ -48,3 +48,5 @@ source/cpp/NS/\.vs/NS/v14/\.suo
 *.log
 
 figures/
+
+*.asv

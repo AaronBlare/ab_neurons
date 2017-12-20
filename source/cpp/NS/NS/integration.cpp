@@ -142,6 +142,24 @@ void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double 
 		rk_step(cp, md, impulse);
 		md.time = double(sec_id) + double(step_id + 1) * md.step;
 
+		double curr_Vpost = md.data[2];
+
+		if (curr_Vpost > cp.thr_Vpost)
+		{
+			if (md.curr_Vpost_status == 0)
+			{
+				md.curr_Vpost_status = 1;
+				md.num_thr_cross_Vpost++;
+			}
+		}
+		else
+		{
+			if (md.curr_Vpost_status == 1)
+			{
+				md.curr_Vpost_status = 0;
+			}
+		}
+
 		if (rp.task == BASIC_EXP_ID)
 		{
 			if (step_id % md.dump_shift == 0)
@@ -163,8 +181,6 @@ void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double 
 	{
 		if (sec_id % md.dump_shift == 0)
 		{
-			cout << "ms: " << (sec_id + 1) << endl;
-
 			md.time_evo[md.curr_dump_id] = md.time;
 			md.I_pre_evo[md.curr_dump_id] = impulse;
 
@@ -175,5 +191,18 @@ void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double 
 
 			md.curr_dump_id++;
 		}
+
+		if (sec_id % (cp.ns / 100) == 0)
+		{
+			cout << "ms: " << (sec_id + 1) << endl;
+		}
+
 	}
+}
+
+void calc_f_out(RunParam &rp, ConfigParam &cp, MainData &md) 
+{
+	cout << "num_thr_cross_Vpost: " << md.num_thr_cross_Vpost << endl;
+	double mean_freq = double(md.num_thr_cross_Vpost) / (double(cp.ns) / 1000.0);
+	md.f_out = mean_freq;
 }

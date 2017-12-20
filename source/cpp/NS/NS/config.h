@@ -85,6 +85,8 @@ struct ConfigParam
 
 	int nd;
 
+	double thr_Vpost;
+
 	double e_1_alpha_x;
 
 	double e_1_2_f_in;
@@ -135,6 +137,8 @@ struct ConfigParam
 
 		int _nd = 1,
 
+		double _thr_Vpost = 0.0,
+
 		double _e_1_alpha_x = 0.05,
 		double _e_1_k_pre = 1.0,
 
@@ -184,6 +188,8 @@ struct ConfigParam
 		ict = _ict;
 
 		nd = _nd;
+
+		thr_Vpost = _thr_Vpost;
 
 		e_1_alpha_x = _e_1_alpha_x;
 		e_1_k_pre = _e_1_k_pre;
