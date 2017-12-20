@@ -1,6 +1,7 @@
 clear all;
 
 home_figures_path = '/home/yusipov/Work/ab_neurons/figures';
+home_data_path = '/home/yusipov/Work/ab_neurons/data';
 
 data_path = '/data/biophys/yusipov/ab_neurons';
 data_path = sprintf('%s', data_path);
@@ -69,9 +70,16 @@ xlabel('$f_{in}$', 'Interpreter', 'latex');
 set(gca, 'FontSize', 30);
 ylabel('$f_{out}$', 'Interpreter', 'latex');
 
-fn_suffix = sprintf('fin(%0.4f)_b(%0.4f)_seed(%d).txt', ...
+fn_suffix = sprintf('fin(%0.4f)_b(%0.4f)_seed(%d)', ...
     f_in, ...
     b, ...
     seed);
      
-savefig(sprintf('%s/bifurcation_%s.fig', home_figures_path, fn_suffix));
+savefig(sprintf('%s/f_out_from_f_in_%s.fig', home_figures_path, fn_suffix));
+
+file_name = sprintf('%s/f_out_from_f_in_%s.txt', home_data_path, fn_suffix);
+file_id = fopen(file_name, 'w');
+for id = 1:size(f_outs, 1)
+	fprintf(file_id, '%0.18e %0.18e\n', f_in_invs(id), f_outs(id));
+end
+fclose(file_id);
