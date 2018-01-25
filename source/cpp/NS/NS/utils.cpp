@@ -243,7 +243,7 @@ double calc_norm(double * vec, int size)
 	return sqrt(sum);
 }
 
-void delete_data(double * data)
+void del(double * data)
 {
 	if (data)
 	{

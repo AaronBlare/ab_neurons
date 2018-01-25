@@ -92,6 +92,8 @@ struct ConfigParam
 	double e_1_2_f_in;
 	double e_1_2_tau;
 	double e_1_k_pre;
+
+	double e_1_k0;
 	
 	double e_2_alpha_I;
 	double e_2_b;
@@ -127,6 +129,16 @@ struct ConfigParam
 	double e_6_beta_b1;
 	double e_6_beta_b2;
 
+	double e_y1_alpha;
+	double e_y1_theta;
+	double e_y1_k;
+	double e_y1_gamma;
+
+	double e_y2_alpha;
+	double e_y2_theta;
+	double e_y2_k;
+	double e_y2_gamma;
+
 	int seed;
 
 	ConfigParam(
@@ -141,6 +153,8 @@ struct ConfigParam
 
 		double _e_1_alpha_x = 0.05,
 		double _e_1_k_pre = 1.0,
+
+		double _e_1_k0 = 2.0,
 
 		double _e_1_2_f_in = 0.5,
 		double _e_1_2_tau = 1.0,
@@ -179,6 +193,17 @@ struct ConfigParam
 		double _e_6_beta_b1 = 0.1,
 		double _e_6_beta_b2 = 35.0,
 
+		double _e_y1_alpha = 0.01,
+		double _e_y1_theta = 0.3,
+		double _e_y1_k = 0.1,
+		double _e_y1_gamma = -0.8,
+
+
+		double _e_y2_alpha = 0.01,
+		double _e_y2_theta = 0.3,
+		double _e_y2_k = 0.1,
+		double _e_y2_gamma = 0.4,
+
 		int _seed = 0
 	)
 	{
@@ -193,6 +218,8 @@ struct ConfigParam
 
 		e_1_alpha_x = _e_1_alpha_x;
 		e_1_k_pre = _e_1_k_pre;
+
+		e_1_k0 = _e_1_k0;
 
 		e_1_2_f_in = _e_1_2_f_in;
 		e_1_2_tau = _e_1_2_tau;
@@ -230,6 +257,16 @@ struct ConfigParam
 		e_6_alpha_a3 = _e_6_alpha_a3;
 		e_6_beta_b1 = _e_6_beta_b1;
 		e_6_beta_b2 = _e_6_beta_b2;
+
+		e_y1_alpha = _e_y1_alpha;
+		e_y1_theta = _e_y1_theta;
+		e_y1_k = _e_y1_k;
+		e_y1_gamma = _e_y1_gamma;
+
+		e_y2_alpha = _e_y2_alpha;
+		e_y2_theta = _e_y2_theta;
+		e_y2_k = _e_y2_k;
+		e_y2_gamma = _e_y2_gamma;
 
 		seed = _seed;
 	}

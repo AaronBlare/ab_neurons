@@ -21,4 +21,4 @@ vector<int> sort_doubles_with_order(vector<double> &v);
 
 double calc_norm(double * vec, int size);
 
-void delete_data(double * data);
+void del(double * data);

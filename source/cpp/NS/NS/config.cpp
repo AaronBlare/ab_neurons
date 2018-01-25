@@ -108,6 +108,11 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 		cp.e_1_k_pre = atof(val.c_str());
 	}
 
+	if (str.compare("e_1_k0") == 0)
+	{
+		cp.e_1_k0 = atof(val.c_str());
+	}
+
 	if (str.compare("e_1_2_tau") == 0)
 	{
 		cp.e_1_2_tau = atof(val.c_str());
@@ -229,6 +234,40 @@ void set_param(RunParam &rp, ConfigParam &cp, string str, string val)
 	{
 		cp.e_6_beta_b2 = atof(val.c_str());
 	}
+
+	if (str.compare("e_y1_alpha") == 0)
+	{
+		cp.e_y1_alpha = atof(val.c_str());
+	}
+	if (str.compare("e_y1_theta") == 0)
+	{
+		cp.e_y1_theta = atof(val.c_str());
+	}
+	if (str.compare("e_y1_k") == 0)
+	{
+		cp.e_y1_k = atof(val.c_str());
+	}
+	if (str.compare("e_y1_gamma") == 0)
+	{
+		cp.e_y1_gamma = atof(val.c_str());
+	}
+
+	if (str.compare("e_y2_alpha") == 0)
+	{
+		cp.e_y2_alpha = atof(val.c_str());
+	}
+	if (str.compare("e_y2_theta") == 0)
+	{
+		cp.e_y2_theta = atof(val.c_str());
+	}
+	if (str.compare("e_y2_k") == 0)
+	{
+		cp.e_y2_k = atof(val.c_str());
+	}
+	if (str.compare("e_y2_gamma") == 0)
+	{
+		cp.e_y2_gamma = atof(val.c_str());
+	}
 }
 
 void init_params(RunParam &rp, ConfigParam &cp, char * file_name)
@@ -287,6 +326,8 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "e_1_alpha_x = " << cp.e_1_alpha_x << endl;
 	cout << "e_1_k_pre = " << cp.e_1_k_pre << endl;
 
+	cout << "e_1_k0 = " << cp.e_1_k0 << endl;
+
 	cout << "e_1_2_tau = " << cp.e_1_2_tau << endl;
 	
 	cout << "e_2_alpha_I = " << cp.e_2_alpha_I << endl;
@@ -321,6 +362,16 @@ void output_params(RunParam &rp, ConfigParam &cp)
 	cout << "e_6_alpha_a3 = " << cp.e_6_alpha_a3 << endl;
 	cout << "e_6_beta_b1 = " << cp.e_6_beta_b1 << endl;
 	cout << "e_6_beta_b2 = " << cp.e_6_beta_b2 << endl;
+
+	cout << "e_y1_alpha = " << cp.e_y1_alpha << endl;
+	cout << "e_y1_theta = " << cp.e_y1_theta << endl;
+	cout << "e_y1_k = " << cp.e_y1_k << endl;
+	cout << "e_y1_gamma = " << cp.e_y1_gamma << endl;
+
+	cout << "e_y2_alpha = " << cp.e_y2_alpha << endl;
+	cout << "e_y2_theta = " << cp.e_y2_theta << endl;
+	cout << "e_y2_k = " << cp.e_y2_k << endl;
+	cout << "e_y2_gamma = " << cp.e_y2_gamma << endl;
 
 	cout << "######################################" << endl;
 }

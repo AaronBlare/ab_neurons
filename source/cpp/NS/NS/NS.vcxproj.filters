@@ -24,10 +24,25 @@
     <ClInclude Include="data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="integration.h">
+    <ClInclude Include="experiments.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="experiments.h">
+    <ClInclude Include="processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="newdeler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rightparter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="propagator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="weibull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lyapunov.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,13 +56,25 @@
     <ClCompile Include="data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="integration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="experiment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="newdeler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rightparter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="propagator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="weibull.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

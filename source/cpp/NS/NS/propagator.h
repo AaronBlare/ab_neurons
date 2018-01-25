@@ -2,16 +2,31 @@
 #include "config.h"
 #include "utils.h"
 #include "data.h"
+#include "rightparter.h"
 
-void right_part(ConfigParam &cp, MainData &md, double * ks, double * x, double time, double impulse);
+class PropagatingBehavior
+{
+public:
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const = 0;
+};
+
+class SimplePropagatingBehavior : public PropagatingBehavior
+{
+public:
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const;
+};
+
+class FullPropagatingBehavior : public PropagatingBehavior
+{
+public:
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const;
+};
 
 void upd_arg(int size, double * x_arg, double * x, double * ks, double coeff);
 
 void rk_final(int size, double * x, double * k1s, double * k2s, double * k3s, double * k4s, double step);
 
 void rk_step(ConfigParam &cp, MainData &md, double impulse);
-
-void propagation(RunParam &rp, ConfigParam &cp, MainData &md);
 
 void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse);
 
