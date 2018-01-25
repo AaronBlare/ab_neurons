@@ -24,6 +24,8 @@ using namespace std;
 
 struct RunParam
 {
+	int		system;				// System id
+
 	int		task;				// Task id	
 
 	string	path;				// Path to files (if nessesary)
@@ -41,6 +43,7 @@ struct RunParam
 	int		max_num_seeds;		// Maximum number of seeds
 
 	RunParam(
+		int _system = 0,
 		int _task = 0,
 
 		string _path = "",
@@ -58,6 +61,7 @@ struct RunParam
 		int _max_num_seeds = 1000000
 	)
 	{
+		system = _system;
 		task = _task;
 
 		path = _path;
@@ -198,7 +202,6 @@ struct ConfigParam
 		double _e_y1_k = 0.1,
 		double _e_y1_gamma = -0.8,
 
-
 		double _e_y2_alpha = 0.01,
 		double _e_y2_theta = 0.3,
 		double _e_y2_k = 0.1,
@@ -272,9 +275,8 @@ struct ConfigParam
 	}
 };
 
+void set_param(RunParam * rp, ConfigParam * cp, string str, string val);
 
-void set_param(RunParam &rp, ConfigParam &cp, string str, string val);
+void init_params(RunParam * rp, ConfigParam * cp, char * file_name);
 
-void init_params(RunParam &rp, ConfigParam &cp, char * file_name);
-
-void output_params(RunParam &rp, ConfigParam &cp);
+void output_params(RunParam * rp, ConfigParam * cp);

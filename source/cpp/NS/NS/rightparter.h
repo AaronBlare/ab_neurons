@@ -5,23 +5,17 @@
 class RightPartBehavior
 {
 public:
-	virtual void set_right_part() const = 0;
+	virtual void right_part(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse) const = 0;
 };
 
 class SimpleRightPartBehaviour : public RightPartBehavior
 {
 public:
-	virtual void set_right_part() const;
+	virtual void right_part(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse) const;
 };
 
 class FullRightPartBehaviour : public RightPartBehavior
 {
 public:
-	virtual void set_right_part() const;
+	virtual void right_part(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse) const;
 };
-
-void (*right_part)(ConfigParam *, MainData *, double *, double *, double, double) = NULL;
-
-void right_part_simple(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse);
-
-void right_part_full(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse);

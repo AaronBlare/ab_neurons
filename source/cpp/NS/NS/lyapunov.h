@@ -3,7 +3,6 @@
 #include "utils.h"
 #include "data.h"
 
-
 void init_lpn_data(ConfigParam &cp, MainData &md);
 void init_cond_lpn(ConfigParam &cp, MainData &md);
 void delete_lpn_data(MainData &md);

@@ -3,5 +3,6 @@
 #include "utils.h"
 #include "data.h"
 
-void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md);
-void delete_weibull_data(MainData &dt);
+void init_weibull_data(RunParam * rp, ConfigParam * cp, MainData * md);
+void weibull_dist(RunParam * rp, ConfigParam * cp, MainData * md);
+void delete_weibull_data(MainData * dt);

@@ -4,32 +4,28 @@
 #include "data.h"
 #include "rightparter.h"
 
-class PropagatingBehavior
+class PropagationBehavior
 {
 public:
-	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const = 0;
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb) const = 0;
 };
 
-class SimplePropagatingBehavior : public PropagatingBehavior
+class SimplePropagationBehavior : public PropagationBehavior
 {
 public:
-	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const;
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb) const;
 };
 
-class FullPropagatingBehavior : public PropagatingBehavior
+class FullPropagationBehavior : public PropagationBehavior
 {
 public:
-	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md) const;
+	virtual void propagate(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb) const;
 };
 
 void upd_arg(int size, double * x_arg, double * x, double * ks, double coeff);
 
 void rk_final(int size, double * x, double * k1s, double * k2s, double * k3s, double * k4s, double step);
 
-void rk_step(ConfigParam &cp, MainData &md, double impulse);
+void rk_step(ConfigParam * cp, MainData * md, RightPartBehavior * rpb, double impulse);
 
-void int_second(RunParam &rp, ConfigParam &cp, MainData &md, int sec_id, double impulse);
-
-void weibull_dist(RunParam &rp, ConfigParam &cp, MainData &md);
-
-void calc_f_out(RunParam &rp, ConfigParam &cp, MainData &md);
+void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb, int sec_id, double impulse);

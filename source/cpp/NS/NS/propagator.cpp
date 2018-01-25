@@ -1,6 +1,6 @@
 #include "propagator.h"
 
-void SimplePropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainData * md) const
+void SimplePropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb) const
 {
 	viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->stream_p, 1, &(md->time_lim), cp->e_1_2_f_in);
 
@@ -14,7 +14,7 @@ void SimplePropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 	{
 		for (int sec_id = 0; sec_id < md->time_lim; sec_id++)
 		{
-			int_second(rp, cp, md, sec_id, impulse);
+			int_second(rp, cp, md, rpb, sec_id, impulse);
 		}
 
 		curr_sec_id = md->time_lim;
@@ -38,7 +38,7 @@ void SimplePropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 			impulse = 1.0;
 			for (int sec_id = curr_sec_id; sec_id < min(curr_sec_id + curr_sec_window, cp->ns); sec_id++)
 			{
-				int_second(rp, cp, md, sec_id, impulse);
+				int_second(rp, cp, md, rpb, sec_id, impulse);
 			}
 
 			curr_sec_id += curr_sec_window;
@@ -46,7 +46,7 @@ void SimplePropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 			impulse = 0.0;
 			for (int sec_id = curr_sec_id; sec_id < min(lim_sec_id, cp->ns); sec_id++)
 			{
-				int_second(rp, cp, md, sec_id, impulse);
+				int_second(rp, cp, md, rpb, sec_id, impulse);
 			}
 
 			curr_sec_id += lim_sec_id - curr_sec_id;
@@ -56,12 +56,12 @@ void SimplePropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 	{
 		for (int sec_id = 0; sec_id < cp->ns; sec_id++)
 		{
-			int_second(rp, cp, md, sec_id, impulse);
+			int_second(rp, cp, md, rpb, sec_id, impulse);
 		}
 	}
 }
 
-void FullPropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainData * md) const
+void FullPropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb) const
 {
 	viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->stream_p, 1, &(md->time_lim), cp->e_1_2_f_in);
 
@@ -75,7 +75,7 @@ void FullPropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 	{
 		for (int sec_id = 0; sec_id < md->time_lim; sec_id++)
 		{
-			int_second(rp, cp, md, sec_id, impulse);
+			int_second(rp, cp, md, rpb, sec_id, impulse);
 		}
 
 		curr_sec_id = md->time_lim;
@@ -100,7 +100,7 @@ void FullPropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 			impulse = 1.0;
 			for (int sec_id = curr_sec_id; sec_id < min(curr_sec_id + curr_sec_window, cp->ns); sec_id++)
 			{
-				int_second(rp, cp, md, sec_id, impulse);
+				int_second(rp, cp, md, rpb, sec_id, impulse);
 			}
 
 			curr_sec_id += curr_sec_window;
@@ -108,7 +108,7 @@ void FullPropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 			impulse = 0.0;
 			for (int sec_id = curr_sec_id; sec_id < min(lim_sec_id, cp->ns); sec_id++)
 			{
-				int_second(rp, cp, md, sec_id, impulse);
+				int_second(rp, cp, md, rpb, sec_id, impulse);
 			}
 
 			curr_sec_id += lim_sec_id - curr_sec_id;
@@ -118,7 +118,7 @@ void FullPropagatingBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 	{
 		for (int sec_id = 0; sec_id < cp->ns; sec_id++)
 		{
-			int_second(rp, cp, md, sec_id, impulse);
+			int_second(rp, cp, md, rpb, sec_id, impulse);
 		}
 	}
 }
@@ -139,41 +139,32 @@ void rk_final(int size, double * x, double * k1s, double * k2s, double * k3s, do
 	}
 }
 
-void rk_step(ConfigParam * cp, MainData * md, double impulse)
+void rk_step(ConfigParam * cp, MainData * md, RightPartBehavior * rpb, double impulse)
 {
-	right_part(cp, md, md->k1s, md->data, md->time, impulse);
+	rpb->right_part(cp, md, md->k1s, md->data, md->time, impulse);
 	upd_arg(md->size, md->args, md->data, md->k1s, md->step * 0.5);
 
 	md->time += md->step * 0.5;
 
-	right_part(cp, md, md->k2s, md->args, md->time, impulse);
+	rpb->right_part(cp, md, md->k2s, md->args, md->time, impulse);
 	upd_arg(md->size, md->args, md->data, md->k2s, md->step * 0.5);
 
-	right_part(cp, md, md->k3s, md->args, md->time, impulse);
+	rpb->right_part(cp, md, md->k3s, md->args, md->time, impulse);
 	upd_arg(md->size, md->args, md->data, md->k3s, md->step * 1.0);
 
 	md->time += md->step * 0.5;
 
-	right_part(cp, md, md->k4s, md->args, md->time, impulse);
+	rpb->right_part(cp, md, md->k4s, md->args, md->time, impulse);
 
 	rk_final(md->size, md->data, md->k1s, md->k2s, md->k3s, md->k4s, md->step);
 }
 
-void weibull_dist(RunParam &rp, ConfigParam &cp, MainData &md)
-{
-	for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
-	{
-		vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md.stream_w, 1, &(md.A), 2.0, 0.0, cp.e_2_b);
-		md.A_evo[dump_id] = md.A;
-	}
-}
-
-void int_second(RunParam * rp, ConfigParam * cp, MainData * md, int sec_id, double impulse)
+void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb, int sec_id, double impulse)
 {
 	for (int step_id = 0; step_id < cp->nsps; step_id++)
 	{
 		md->time = double(sec_id) + double(step_id) * md->step;
-		rk_step(cp, md, impulse);
+		rk_step(cp, md, rpb, impulse);
 		md->time = double(sec_id) + double(step_id + 1) * md->step;
 
 		double curr_Vpost = md->data[2];
@@ -234,9 +225,4 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, int sec_id, doub
 	}
 }
 
-void calc_f_out(RunParam &rp, ConfigParam &cp, MainData &md)
-{
-	cout << "num_thr_cross_Vpost: " << md.num_thr_cross_Vpost << endl;
-	double mean_freq = double(md.num_thr_cross_Vpost) / (double(cp.ns) / 1000.0);
-	md.f_out = mean_freq;
-}
+

@@ -7,7 +7,7 @@ void error(const std::string& err, const char* func, const char* file, int line)
 
 void print_int_array(int * data, int N);
 
-string file_name_suffix(RunParam &rp, ConfigParam &cp, int precision);
+string file_name_suffix(RunParam * rp, ConfigParam * cp, int precision);
 
 void write_double_data(string file_name, double * data, int size, int precision, bool append);
 

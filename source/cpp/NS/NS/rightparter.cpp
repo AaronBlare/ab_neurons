@@ -1,16 +1,6 @@
 #include "rightparter.h"
 
-void SimpleRightPartBehaviour::set_right_part() const
-{
-	right_part = &right_part_simple;
-}
-
-void FullRightPartBehaviour::set_right_part() const
-{
-	right_part = &right_part_full;
-}
-
-void right_part_simple(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse)
+void SimpleRightPartBehaviour::right_part(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse) const
 {
 	ks[0] = -(cp->e_1_alpha_x) * (x[0] - (cp->e_1_k_pre) * impulse);
 
@@ -37,7 +27,7 @@ void right_part_simple(ConfigParam * cp, MainData * md, double * ks, double * x,
 	ks[5] = alpha_h * (1.0 - x[5]) - beta_h * x[5];
 }
 
-void right_part_full(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse)
+void FullRightPartBehaviour::right_part(ConfigParam * cp, MainData * md, double * ks, double * x, double time, double impulse) const
 {
 	ks[0] = -(cp->e_1_alpha_x) * (x[0] - (cp->e_1_k0) * (1.0 + cp->e_y1_gamma * x[6]) * impulse);
 
@@ -69,5 +59,3 @@ void right_part_full(ConfigParam * cp, MainData * md, double * ks, double * x, d
 	double y2_H = 1.0 / (1.0 + exp(-(x[0] - cp->e_y2_theta) / cp->e_y2_k));
 	ks[7] = -cp->e_y2_alpha * (x[7] - y2_H);
 }
-
-
