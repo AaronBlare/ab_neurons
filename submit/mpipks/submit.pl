@@ -15,6 +15,7 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	
 	$val = 1000.0 / $f_in_Hz;
 	
+	$sys_id = 1;
 	$task = 1;
 	$path = "";
 	$f_in_start = $val;
@@ -32,6 +33,7 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	$thr_Vpost = 0.0;
 	$e_1_alpha_x =  0.1;
 	$e_1_k_pre = 2.0;
+	$e_1_k0 = 2.0;
 	$e_1_2_tau = 1.0;
 	$e_2_alpha_I = 0.1;
 	$e_2_A = 5.0;
@@ -61,6 +63,15 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	$e_6_alpha_a3 = 65.0;
 	$e_6_beta_b1 = 0.1;
 	$e_6_beta_b2 = 35.0;
+	$e_y1_alpha = 0.01;
+	$e_y1_theta = 0.3;
+	$e_y1_k = 0.1;
+	$e_y1_gamma = -0.8;
+	$e_y2_alpha = 0.01;
+	$e_y2_theta = 0.3;
+	$e_y2_k = 0.1;
+	$e_y2_gamma = 0.4;
+	
 	
 	$f_in_str = sprintf("%.4f", $f_in_start);
 	$b_str = sprintf("%.4f", $b_start);
@@ -75,15 +86,16 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	sub ForderName{
 		$key_str = $_[0];
 		
-		return  "$data_path/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}/seed_${key_str}";
+		return  "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}/seed_${key_str}";
 	}
 	
-	mkdir "$data_path/task_${task}";
-	mkdir "$data_path/task_${task}/ns_${ns}";
-	mkdir "$data_path/task_${task}/ns_${ns}/nsps_${nsps}";
-	mkdir "$data_path/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}";
-	mkdir "$data_path/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}";
-	mkdir "$data_path/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}";
+	mkdir "$data_path/system_${sys_id}";
+	mkdir "$data_path/system_${sys_id}/task_${task}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}";
 
 	for($val = $start; $val < $finish; $val+=1)
 	{
@@ -102,6 +114,7 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 		
 		open( WF,">$key/config.txt");
 		
+		print WF "system $sys_id \n"; 
 		print WF "task $task \n"; 
 		print WF "path $path \n"; 
 		print WF "f_in_start $f_in_start \n"; 
@@ -118,7 +131,8 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 		print WF "nd $nd \n"; 
 		print WF "thr_Vpost $thr_Vpost \n"; 
 		print WF "e_1_alpha_x $e_1_alpha_x \n"; 
-		print WF "e_1_k_pre $e_1_k_pre \n"; 
+		print WF "e_1_k_pre $e_1_k_pre \n";
+		print WF "e_1_k0 $e_1_k0 \n"; 
 		print WF "e_1_2_tau $e_1_2_tau \n"; 
 		print WF "e_2_alpha_I $e_2_alpha_I \n"; 
 		print WF "e_2_A $e_2_A \n"; 
@@ -148,6 +162,16 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 		print WF "e_6_alpha_a3 $e_6_alpha_a3 \n";
 		print WF "e_6_beta_b1 $e_6_beta_b1 \n";
 		print WF "e_6_beta_b2 $e_6_beta_b2 \n";
+		
+		print WF "e_y1_alpha $e_y1_alpha \n";
+		print WF "e_y1_theta $e_y1_theta \n";
+		print WF "e_y1_k $e_y1_k \n";
+		print WF "e_y1_gamma $e_y1_gamma \n";
+		
+		print WF "e_y2_alpha $e_y2_alpha \n";
+		print WF "e_y2_theta $e_y2_theta \n";
+		print WF "e_y2_k $e_y2_k \n";
+		print WF "e_y2_gamma $e_y2_gamma \n";
 		
 		close WF;
 
