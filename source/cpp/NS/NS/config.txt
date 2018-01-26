@@ -1,3 +1,4 @@
+system 0
 task 1
 path
 f_in_start 1.11
@@ -15,6 +16,7 @@ nd 600000
 thr_Vpost 0.0
 e_1_alpha_x 0.1
 e_1_k_pre 2.0
+e_1_k0 2.0
 e_1_2_tau 1.0
 e_2_alpha_I 0.1
 e_2_A 5.0
@@ -44,3 +46,11 @@ e_6_alpha_a2 0.05
 e_6_alpha_a3 65.0
 e_6_beta_b1 0.1
 e_6_beta_b2 35.0
+e_y1_alpha 0.01
+e_y1_theta 0.3
+e_y1_k 0.1
+e_y1_gamma -0.8
+e_y2_alpha 0.01
+e_y2_theta 0.3
+e_y2_k 0.1
+e_y2_gamma 0.4

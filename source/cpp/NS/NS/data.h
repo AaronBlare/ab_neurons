@@ -50,30 +50,3 @@ struct MainData
 	double * rvm_lpn;		// Aux data for Lyapunov exponents
 };
 
-
-void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md);
-
-void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md);
-
-void init_lpn_data(ConfigParam &cp, MainData &md);
-
-void delete_main_data(MainData &dt);
-
-void delete_weibull_data(MainData &dt);
-
-void delete_lpn_data(MainData &md);
-
-void init_cond(RunParam &rp, ConfigParam &cp, MainData &md);
-
-void init_cond_lpn(ConfigParam &cp, MainData &md);
-
-void calc_norm_lpn(MainData &md, int lpn_id);
-
-void normalization_lpn(MainData &md, int lpn_id);
-
-void scalar_mult_lpn(MainData &md, double * mults, int lpn_id, int lpn_id_tmp);
-
-void sub_lpn(MainData &md, double* mults, int lpn_id, int lpn_id_tmp);
-
-void gsorth_lpn(MainData &md);
-

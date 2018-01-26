@@ -150,19 +150,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="characteristics.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="experiments.h" />
-    <ClInclude Include="integration.h" />
+    <ClInclude Include="lyapunov.h" />
+    <ClInclude Include="weibull.h" />
+    <ClInclude Include="processor.h" />
+    <ClInclude Include="newdeler.h" />
+    <ClInclude Include="propagator.h" />
+    <ClInclude Include="rightparter.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="characteristics.cpp" />
     <ClCompile Include="config.cpp" />
-    <ClCompile Include="data.cpp" />
     <ClCompile Include="experiment.cpp" />
-    <ClCompile Include="integration.cpp" />
+    <ClCompile Include="newdeler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="processor.cpp" />
+    <ClCompile Include="propagator.cpp" />
+    <ClCompile Include="rightparter.cpp" />
+    <ClCompile Include="lyapunov.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="weibull.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

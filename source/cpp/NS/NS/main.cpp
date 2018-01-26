@@ -10,29 +10,29 @@ int main(int argc, char ** argv)
 		omp_set_num_threads(atoi(argv[1]));
 	}
 
-	ConfigParam cp;
-	RunParam rp;
+	RunParam * rp = new RunParam();
+	ConfigParam * cp = new ConfigParam();
 	init_params(rp, cp, "config.txt");
 
 	double time = omp_get_wtime();
 
-	if (rp.task == BASIC_EXP_ID || rp.task == LONG_EXP_ID)
+	if (rp->task == BASIC_EXP_ID || rp->task == LONG_EXP_ID)
 	{
 		basic_exp(rp, cp);
 	}
-	else if (rp.task == WEIBULL_EXP_ID)
+	else if (rp->task == WEIBULL_EXP_ID)
 	{
 		weibull_exp(rp, cp);
 	}
 	else
 	{
 		stringstream msg;
-		msg << "wrong task value: " << rp.task << endl;
+		msg << "Wrong task value: " << rp->task << endl;
 		Error(msg.str());
 	}
 
 	time = omp_get_wtime() - time;
-	cout << "total time: " << time << endl << endl;
+	cout << "Total time: " << time << endl << endl;
 
 	return 0;
 }

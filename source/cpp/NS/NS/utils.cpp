@@ -15,13 +15,13 @@ void print_int_array(int * data, int N)
 	}
 }
 
-string file_name_suffix(RunParam &rp, ConfigParam &cp, int precision)
+string file_name_suffix(RunParam * rp, ConfigParam * cp, int precision)
 {
 	stringstream fns;
 
-	fns << "_fin(" << setprecision(precision) << fixed << cp.e_1_2_f_in << ")";
-	fns << "_b(" << setprecision(precision) << fixed << cp.e_2_b << ")";
-	fns << "_seed(" << cp.seed << ")";
+	fns << "_fin(" << setprecision(precision) << fixed << cp->e_1_2_f_in << ")";
+	fns << "_b(" << setprecision(precision) << fixed << cp->e_2_b << ")";
+	fns << "_seed(" << cp->seed << ")";
 	fns << ".txt";
 
 	return fns.str();
@@ -243,7 +243,7 @@ double calc_norm(double * vec, int size)
 	return sqrt(sum);
 }
 
-void delete_data(double * data)
+void del(double * data)
 {
 	if (data)
 	{

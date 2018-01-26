@@ -1,109 +1,4 @@
-#include "data.h"
-
-void init_main_data(RunParam &rp, ConfigParam &cp, MainData &md)
-{
-	md.size = 6;
-
-	md.time = 0.0;
-
-	md.step = 1.0 / double(cp.nsps);
-
-	md.time_lim = 0;
-
-	md.A = 0.0;
-
-	vslNewStream(&(md.stream_p), VSL_BRNG_MCG31, 77778888);
-	vslLeapfrogStream(md.stream_p, cp.seed, rp.max_num_seeds);
-
-	vslNewStream(&(md.stream_w), VSL_BRNG_MCG31, 77778888);
-	vslLeapfrogStream(md.stream_w, cp.seed, rp.max_num_seeds);
-
-	md.data = new double[md.size];
-	md.args = new double[md.size];
-	md.k1s = new  double[md.size];
-	md.k2s = new  double[md.size];
-	md.k3s = new  double[md.size];
-	md.k4s = new  double[md.size];
-
-	if (rp.task == LONG_EXP_ID)
-	{
-		md.size_evo = cp.nd + 1;
-		md.dump_shift = cp.ns / cp.nd;
-	}
-	else if (rp.task == BASIC_EXP_ID)
-	{
-		md.size_evo = cp.ns * cp.nd + 1;
-		md.dump_shift = cp.nsps / cp.nd;
-	}
-	else 
-	{
-		stringstream msg;
-		msg << "Wrong task value: " << rp.task << endl;
-		Error(msg.str());
-	}
-	
-	md.curr_dump_id = 0;
-	md.data_evo = new double* [md.size];
-	md.time_evo = new double[md.size_evo];
-	md.I_pre_evo = new double[md.size_evo];
-
-	for (int eq_id = 0; eq_id < md.size; eq_id++)
-	{
-		md.data[eq_id] = 0.0;
-		md.args[eq_id] = 0.0;
-		md.k1s[eq_id] = 0.0;
-		md.k2s[eq_id] = 0.0;
-		md.k3s[eq_id] = 0.0;
-		md.k4s[eq_id] = 0.0;
-
-		md.data_evo[eq_id] = new double[md.size_evo];
-		for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
-		{
-			md.data_evo[eq_id][dump_id] = 0.0;
-
-			if (eq_id == 0)
-			{
-				md.time_evo[dump_id] = 0.0;
-				md.I_pre_evo[dump_id] = 0.0;
-			}
-		}
-	}
-
-	md.curr_Vpost_status = 0;
-	md.num_thr_cross_Vpost = 0;
-
-	md.f_out = 0.0;
-}
-
-void init_weibull_data(RunParam &rp, ConfigParam &cp, MainData &md)
-{
-	md.size = 6;
-
-	md.time = 0.0;
-
-	md.step = 1.0 / double(cp.nsps);
-
-	md.time_lim = 0;
-
-	md.A = 0.0;
-
-	vslNewStream(&(md.stream_p), VSL_BRNG_MCG31, 77778888);
-	vslLeapfrogStream(md.stream_p, cp.seed, rp.max_num_seeds);
-
-	vslNewStream(&(md.stream_w), VSL_BRNG_MCG31, 77778888);
-	vslLeapfrogStream(md.stream_w, cp.seed, rp.max_num_seeds);
-
-	md.size_evo = cp.nd + 1;
-	md.dump_shift = cp.ns / cp.nd;
-	
-	md.curr_dump_id = 0;
-
-	md.A_evo = new double[md.size_evo];
-	for (int dump_id = 0; dump_id < md.size_evo; dump_id++)
-	{
-		md.A_evo[dump_id] = 0.0;
-	}
-}
+#include "lyapunov.h"
 
 void init_lpn_data(ConfigParam &cp, MainData &md)
 {
@@ -145,29 +40,6 @@ void init_lpn_data(ConfigParam &cp, MainData &md)
 	}
 }
 
-void delete_main_data(MainData &md)
-{
-	delete_data(md.data);
-	delete_data(md.args);
-	delete_data(md.k1s);
-	delete_data(md.k2s);
-	delete_data(md.k3s);
-	delete_data(md.k4s);
-
-	for (int eq_id = 0; eq_id < md.size; eq_id++)
-	{
-		delete[] md.data_evo[eq_id];
-	}
-	delete[] md.data_evo;
-	delete[] md.time_evo;
-	delete[] md.I_pre_evo;
-}
-
-void delete_weibull_data(MainData &md)
-{
-	delete[] md.A_evo;
-}
-
 void delete_lpn_data(MainData &md)
 {
 	for (int lpn_id = 0; lpn_id < md.num_lpn; lpn_id++)
@@ -190,26 +62,6 @@ void delete_lpn_data(MainData &md)
 	delete[] md.norms_lpn;
 	delete[] md.exps_lpn;
 	delete[] md.rvm_lpn;
-}
-
-void init_cond(RunParam &rp, ConfigParam &cp, MainData &md)
-{
-	md.data[0] = 0.0;
-	md.data[1] = 0.0;
-	md.data[2] = 0.0;
-	md.data[3] = 0.0;
-	md.data[4] = 0.0;
-	md.data[5] = 0.0;
-
-	md.time_evo[md.curr_dump_id] = md.time;
-	md.I_pre_evo[md.curr_dump_id] = 0;
-
-	for (int eq_id = 0; eq_id < md.size; eq_id++)
-	{
-		md.data_evo[eq_id][md.curr_dump_id] = md.data[eq_id];
-	}
-
-	md.curr_dump_id++;
 }
 
 void init_cond_lpn(ConfigParam &cp, MainData &md)
@@ -299,4 +151,3 @@ void gsorth_lpn(MainData &md)
 		md.exps_lpn[lpn_id] = md.rvm_lpn[lpn_id] / md.time;
 	}
 }
-
