@@ -2,11 +2,7 @@
 
 void SimpleNewDelBehaviour::init_data(RunParam * rp, ConfigParam * cp, MainData * md) const
 {
-	init_model_data(rp, cp, md, 6);
-	init_random_data(rp, cp, md);
-	init_evo_data(rp, cp, md);
-	init_propagation_data(rp, cp, md);
-	init_start(rp, cp, md);
+	init_all_data(rp, cp, md, 6);
 }
 
 void SimpleNewDelBehaviour::free_data(RunParam * rp, ConfigParam * cp, MainData * md) const
@@ -16,11 +12,7 @@ void SimpleNewDelBehaviour::free_data(RunParam * rp, ConfigParam * cp, MainData 
 
 void FullNewDelBehaviour::init_data(RunParam * rp, ConfigParam * cp, MainData * md) const
 {
-	init_model_data(rp, cp, md, 8);
-	init_random_data(rp, cp, md);
-	init_evo_data(rp, cp, md);
-	init_propagation_data(rp, cp, md);
-	init_start(rp, cp, md);
+	init_all_data(rp, cp, md, 8);
 }
 
 void FullNewDelBehaviour::free_data(RunParam * rp, ConfigParam * cp, MainData * md) const
@@ -28,6 +20,14 @@ void FullNewDelBehaviour::free_data(RunParam * rp, ConfigParam * cp, MainData * 
 	free_all_data(md);
 }
 
+void init_all_data(RunParam * rp, ConfigParam * cp, MainData * md, int size)
+{
+	init_model_data(rp, cp, md, size);
+	init_random_data(rp, cp, md);
+	init_evo_data(rp, cp, md);
+	init_propagation_data(rp, cp, md);
+	init_start(rp, cp, md);
+}
 
 void init_model_data(RunParam * rp, ConfigParam * cp, MainData * md, int size)
 {

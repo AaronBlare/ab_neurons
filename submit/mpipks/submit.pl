@@ -66,13 +66,15 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	$e_y1_alpha = 0.01;
 	$e_y1_theta = 0.3;
 	$e_y1_k = 0.1;
-	$e_y1_gamma = -0.8;
+	$e_y1_gamma = 0.0;
 	$e_y2_alpha = 0.01;
 	$e_y2_theta = 0.3;
 	$e_y2_k = 0.1;
 	$e_y2_gamma = 0.4;
 	
 	
+	$e_y1_gamma_str = sprintf("%.4f", $e_y1_gamma);
+	$e_y2_gamma_str = sprintf("%.4f", $e_y2_gamma);
 	$f_in_str = sprintf("%.4f", $f_in_start);
 	$b_str = sprintf("%.4f", $b_start);
 	$thr_Vpost_str = sprintf("%.4f", $thr_Vpost);
@@ -86,16 +88,18 @@ for($f_in_Hz = 1.0; $f_in_Hz <= 1000.01; $f_in_Hz += 1.0)
 	sub ForderName{
 		$key_str = $_[0];
 		
-		return  "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}/seed_${key_str}";
+		return  "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}/y2_gamma_${e_y2_gamma_str}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}/seed_${key_str}";
 	}
 	
 	mkdir "$data_path/system_${sys_id}";
 	mkdir "$data_path/system_${sys_id}/task_${task}";
 	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}";
 	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}";
-	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}";
-	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}";
-	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}/y2_gamma_${e_y2_gamma_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}/y2_gamma_${e_y2_gamma_str}/f_in_${f_in_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}/y2_gamma_${e_y2_gamma_str}/f_in_${f_in_str}/b_${b_str}";
+	mkdir "$data_path/system_${sys_id}/task_${task}/ns_${ns}/nsps_${nsps}/y1_gamma_${e_y1_gamma_str}/y2_gamma_${e_y2_gamma_str}/f_in_${f_in_str}/b_${b_str}/thr_Vpost_${thr_Vpost_str}";
 
 	for($val = $start; $val < $finish; $val+=1)
 	{

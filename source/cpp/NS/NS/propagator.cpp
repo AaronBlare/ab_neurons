@@ -85,7 +85,7 @@ void FullPropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 			curr_sec_window = 1;
 
 			double b = cp->e_2_b * (1.0 + cp->e_y2_gamma * md->data[7]);
-			vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md->stream_w, 1, &(md->A), 2.0, 0.0, cp->e_2_b);
+			vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md->stream_w, 1, &(md->A), 2.0, 0.0, b);
 
 			viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->stream_p, 1, &(md->time_lim), cp->e_1_2_f_in);
 
@@ -204,7 +204,7 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 
 	if (rp->task == LONG_EXP_ID)
 	{
-		if (sec_id % md->dump_shift == 0)
+		if ((sec_id + 1) % md->dump_shift == 0)
 		{
 			md->time_evo[md->curr_dump_id] = md->time;
 			md->I_pre_evo[md->curr_dump_id] = impulse;
@@ -217,11 +217,10 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 			md->curr_dump_id++;
 		}
 
-		if (sec_id % (cp->ns / 100) == 0)
+		if ((sec_id + 1) % (cp->ns / 100) == 0)
 		{
 			cout << "ms: " << (sec_id + 1) << endl;
 		}
-
 	}
 }
 

@@ -55,10 +55,6 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 
 				proc->process();
 
-				delete ndb;
-				delete rpb;
-				delete pb;
-
 				write_2d_double_data(fn_data, md->data_evo, md->size, md->size_evo, 16, 0);
 				write_double_data(fn_time, md->time_evo, md->size_evo, 16, 0);
 				write_double_data(fn_I_pre, md->I_pre_evo, md->size_evo, 16, 0);
@@ -68,6 +64,10 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 				write_double_data(fn_f_out, &(md->f_out), 1, 16, 0);
 
 				proc->clear();
+
+				delete ndb;
+				delete rpb;
+				delete pb;
 			}
 		}
 	}
