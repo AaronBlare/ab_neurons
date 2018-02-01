@@ -204,7 +204,7 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 
 	if (rp->task == LONG_EXP_ID)
 	{
-		if (sec_id % md->dump_shift == 0)
+		if ((sec_id + 1) % md->dump_shift == 0)
 		{
 			md->time_evo[md->curr_dump_id] = md->time;
 			md->I_pre_evo[md->curr_dump_id] = impulse;
@@ -217,11 +217,10 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 			md->curr_dump_id++;
 		}
 
-		if (sec_id % (cp->ns / 100) == 0)
+		if ((sec_id + 1) % (cp->ns / 100) == 0)
 		{
 			cout << "ms: " << (sec_id + 1) << endl;
 		}
-
 	}
 }
 

@@ -23,6 +23,8 @@ public:
 	virtual void free_data(RunParam * rp, ConfigParam * cp, MainData * md) const;
 };
 
+void init_all_data(RunParam * rp, ConfigParam * cp, MainData * md, int size);
+
 void init_model_data(RunParam * rp, ConfigParam * cp, MainData * md, int size);
 
 void init_random_data(RunParam * rp, ConfigParam * cp, MainData * md);
