@@ -1,4 +1,4 @@
-system 1 
+system 0 
 task 1 
 path  
 f_in_start 2.4330900243309 
@@ -10,9 +10,10 @@ b_num 1
 seed_start 1 
 seed_num 1 
 max_num_seeds 1000000 
-ns 60000 
+nn 1
+ns 600
 nsps 1000 
-nd 10 
+nd 100 
 thr_Vpost 0 
 e_1_alpha_x 0.1 
 e_1_k_pre 2 

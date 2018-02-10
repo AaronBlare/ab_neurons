@@ -81,6 +81,10 @@ void set_param(RunParam * rp, ConfigParam * cp, string str, string val)
 		rp->max_num_seeds = atoi(val.c_str());
 	}
 
+	if (str.compare("nn") == 0)
+	{
+		cp->nn = atoi(val.c_str());
+	}
 	if (str.compare("ns") == 0)
 	{
 		cp->ns = atoi(val.c_str());
@@ -320,6 +324,8 @@ void output_params(RunParam * rp, ConfigParam * cp)
 	cout << "seed_start = " << rp->seed_start << endl;
 	cout << "seed_num = " << rp->seed_num << endl;
 	cout << "max_num_seeds = " << rp->max_num_seeds << endl;
+
+	cout << "nn = " << cp->nn << endl;
 
 	cout << "ns = " << cp->ns << endl;
 	cout << "nsps = " << cp->nsps << endl;

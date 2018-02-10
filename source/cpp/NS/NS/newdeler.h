@@ -23,9 +23,9 @@ public:
 	virtual void free_data(RunParam * rp, ConfigParam * cp, MainData * md) const;
 };
 
-void init_all_data(RunParam * rp, ConfigParam * cp, MainData * md, int size);
+void init_all_data(RunParam * rp, ConfigParam * cp, MainData * md, int is_env);
 
-void init_model_data(RunParam * rp, ConfigParam * cp, MainData * md, int size);
+void init_model_data(RunParam * rp, ConfigParam * cp, MainData * md, int is_env);
 
 void init_random_data(RunParam * rp, ConfigParam * cp, MainData * md);
 
@@ -35,4 +35,6 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md);
 
 void init_start(RunParam * rp, ConfigParam * cp, MainData * md);
 
-void free_all_data(MainData * md);
+void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md);
+
+void free_model_data(MainData * md);
