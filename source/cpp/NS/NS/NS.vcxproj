@@ -154,7 +154,6 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="experiments.h" />
-    <ClInclude Include="lyapunov.h" />
     <ClInclude Include="weibull.h" />
     <ClInclude Include="processor.h" />
     <ClInclude Include="newdeler.h" />
@@ -171,7 +170,6 @@
     <ClCompile Include="processor.cpp" />
     <ClCompile Include="propagator.cpp" />
     <ClCompile Include="rightparter.cpp" />
-    <ClCompile Include="lyapunov.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="weibull.cpp" />
   </ItemGroup>

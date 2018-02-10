@@ -4,49 +4,45 @@
 
 struct MainData
 {
-	int size;				// Data size
+	int num_neurons;		// Number of neurons
+	int size_neu;			// Data size for neurons
+	int size_env;			// Data size for enviroment
 
 	double time;			// Current integration time
 
 	double step;			// Integration step
 
-	int time_lim;			// Current time limit
+	int * time_lim;			// Current time limit for neurons
+	double * A;				// Current A for neurons
 
-	double A;				// Current A
+	VSLStreamStatePtr * streams_p;	// Streams for Poisson
+	VSLStreamStatePtr * streams_w;	// Stream for Weibull
 
-	VSLStreamStatePtr stream_p;		// Stream for Poisson
-	VSLStreamStatePtr stream_w;		// Stream for Weibull
+	double ** data_neu;			// Integration data for neurons
+	double ** args_neu;			// Integration routines data for neurons
+	double ** k1s_neu;			// Integration routines data for neurons
+	double ** k2s_neu;			// Integration routines data for neurons
+	double ** k3s_neu;			// Integration routines data for neurons
+	double ** k4s_neu;			// Integration routines data for neurons
 
-	double * data;			// Integration data
-	double * args;			// Integration routines data
-	double * k1s;			// Integration routines data
-	double * k2s;			// Integration routines data
-	double * k3s;			// Integration routines data
-	double * k4s;			// Integration routines data
+	double * data_env;			// Integration data for enviroment
+	double * args_env;			// Integration routines data for enviroment
+	double * k1s_env;			// Integration routines data for enviroment
+	double * k2s_env;			// Integration routines data for enviroment
+	double * k3s_env;			// Integration routines data for enviroment
+	double * k4s_env;			// Integration routines data for enviroment
 
-	int size_evo;			// Size of evo data
-	int curr_dump_id;		// Current dump id
-	double ** data_evo;		// Data evolution
-	double * time_evo;		// Time evolution
-	double * I_pre_evo;		// I_pre evolution
-	double * A_evo;			// A evolution
+	int size_evo;				// Size of evo data
+	int curr_dump_id;			// Current dump id
+	double *** data_neu_evo;	// Data evolution for neurons
+	double ** data_env_evo;		// Data evolution for enviroment
+	double * time_evo;			// Time evolution
+	double * A_evo;				// A evolution
 
 	int dump_shift;			// Dump shift
 
-	int curr_Vpost_status;		// Current status of Vpost
-	int num_thr_cross_Vpost;	// Total number of crossings
-	double f_out;				// f_out
-
-	int num_lpn;			// Number of Lyapunov exponents
-
-	double ** data_lpn;		// Data for Lyapunov exps
-	double ** args_lpn;		// Integration Lyapunov routines data
-	double ** k1s_lpn;		// Integration Lyapunov routines data
-	double ** k2s_lpn;		// Integration Lyapunov routines data
-	double ** k3s_lpn;		// Integration Lyapunov routines data
-	double ** k4s_lpn;		// Integration Lyapunov routines data
-	double * norms_lpn;		// Norms for Lyapunov vectors
-	double * exps_lpn;		// Lyapunov exponents
-	double * rvm_lpn;		// Aux data for Lyapunov exponents
+	int * curr_Vpost_status;	// Current status of Vpost
+	int * num_thr_cross_Vpost;	// Total number of crossings
+	double * f_out;				// f_out
 };
 

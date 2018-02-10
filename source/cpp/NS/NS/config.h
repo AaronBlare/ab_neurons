@@ -82,6 +82,8 @@ struct RunParam
 
 struct ConfigParam
 {
+	int nn;
+
 	int ns;
 	int nsps;
 
@@ -146,8 +148,11 @@ struct ConfigParam
 	int seed;
 
 	ConfigParam(
-		double _ns = 100,
-		double _nsps = 1000,
+
+		int _nn = 1,
+
+		int _ns = 100,
+		int _nsps = 1000,
 
 		int _ict = 0,
 
@@ -210,6 +215,8 @@ struct ConfigParam
 		int _seed = 0
 	)
 	{
+		nn = _nn;
+
 		ns = _ns;
 		nsps = _nsps;
 

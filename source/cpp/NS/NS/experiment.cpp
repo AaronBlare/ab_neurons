@@ -18,10 +18,6 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 				cout << "e_2_b = " << cp->e_2_b << endl;
 				cout << "seed = " << cp->seed << endl;
 
-				string fn_data = rp->path + "data" + file_name_suffix(rp, cp, 4);
-				string fn_time = rp->path + "time" + file_name_suffix(rp, cp, 4);
-				string fn_I_pre = rp->path + "I_pre" + file_name_suffix(rp, cp, 4);
-
 				MainData * md = new MainData();
 
 				NewDelBehavior * ndb;
@@ -55,13 +51,25 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 
 				proc->process();
 
-				write_2d_double_data(fn_data, md->data_evo, md->size, md->size_evo, 16, 0);
-				write_double_data(fn_time, md->time_evo, md->size_evo, 16, 0);
-				write_double_data(fn_I_pre, md->I_pre_evo, md->size_evo, 16, 0);
+				if (md->size_env > 0)
+				{
+					string fn_data_env = rp->path + "data_env" + file_name_suffix(rp, cp, 4);
+					write_2d_double_data(fn_data_env, md->data_env_evo, md->size_env, md->size_evo, 16, 0);
+				}
 
 				calc_f_out(rp, cp, md);
-				string fn_f_out = rp->path + "f_out" + file_name_suffix(rp, cp, 4);
-				write_double_data(fn_f_out, &(md->f_out), 1, 16, 0);
+
+				for (int n_id = 0; n_id < cp->nn; n_id++)
+				{
+					string fn_data_neu = rp->path + "data_neu_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+					write_2d_double_data(fn_data_neu, md->data_neu_evo[n_id], md->size_neu, md->size_evo, 16, 0);
+
+					string fn_time = rp->path + "time_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+					write_double_data(fn_time, md->time_evo, md->size_evo, 16, 0);
+
+					string fn_f_out = rp->path + "f_out_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+					write_double_data(fn_f_out, &(md->f_out[n_id]), 1, 16, 0);
+				}
 
 				proc->clear();
 
