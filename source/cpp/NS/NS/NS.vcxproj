@@ -154,6 +154,7 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="experiments.h" />
+    <ClInclude Include="poisson.h" />
     <ClInclude Include="weibull.h" />
     <ClInclude Include="processor.h" />
     <ClInclude Include="newdeler.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="experiment.cpp" />
     <ClCompile Include="newdeler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="poisson.cpp" />
     <ClCompile Include="processor.cpp" />
     <ClCompile Include="propagator.cpp" />
     <ClCompile Include="rightparter.cpp" />

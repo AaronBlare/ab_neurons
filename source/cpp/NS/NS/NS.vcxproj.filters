@@ -42,10 +42,10 @@
     <ClInclude Include="weibull.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lyapunov.h">
+    <ClInclude Include="characteristics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="characteristics.h">
+    <ClInclude Include="poisson.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,10 +77,10 @@
     <ClCompile Include="weibull.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lyapunov.cpp">
+    <ClCompile Include="characteristics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="characteristics.cpp">
+    <ClCompile Include="poisson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

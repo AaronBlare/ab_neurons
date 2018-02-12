@@ -19,6 +19,7 @@
 #define BASIC_EXP_ID 0
 #define LONG_EXP_ID 1
 #define WEIBULL_EXP_ID 2
+#define POISSON_EXP_ID 3
 
 using namespace std;
 
