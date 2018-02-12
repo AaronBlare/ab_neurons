@@ -115,3 +115,37 @@ void weibull_exp(RunParam * rp, ConfigParam * cp)
 		}
 	}
 }
+
+void poisson_exp(RunParam * rp, ConfigParam * cp)
+{
+	for (int f_in_id = 0; f_in_id < rp->f_in_num; f_in_id++)
+	{
+		cp->e_1_2_f_in = rp->f_in_start + double(f_in_id) * rp->f_in_shift;
+
+		for (int b_id = 0; b_id < rp->b_num; b_id++)
+		{
+			cp->e_2_b = rp->b_start + double(b_id) * rp->b_shift;
+
+			for (int seed = rp->seed_start; seed < rp->seed_start + rp->seed_num; seed++)
+			{
+				cp->seed = seed;
+
+				cout << "e_1_2_f_in = " << cp->e_1_2_f_in << endl;
+				cout << "e_2_b = " << cp->e_2_b << endl;
+				cout << "seed = " << cp->seed << endl;
+
+				string fn_H_x = rp->path + "H_x" + file_name_suffix(rp, cp, 4);
+
+				MainData * md = new MainData();
+
+				init_poisson_data(rp, cp, md);
+
+				poisson_dist(rp, cp, md);
+
+				write_int_data(fn_H_x, md->H_x_evo, md->size_evo, 0);
+
+				delete_poisson_data(md);
+			}
+		}
+	}
+}

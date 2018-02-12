@@ -24,6 +24,10 @@ int main(int argc, char ** argv)
 	{
 		weibull_exp(rp, cp);
 	}
+	else if (rp->task == POISSON_EXP_ID)
+	{
+		poisson_exp(rp, cp);
+	}
 	else
 	{
 		stringstream msg;

@@ -38,6 +38,7 @@ struct MainData
 	double ** data_env_evo;		// Data evolution for enviroment
 	double * time_evo;			// Time evolution
 	double * A_evo;				// A evolution
+	int * H_x_evo;			// Poisson evolution
 
 	int dump_shift;			// Dump shift
 

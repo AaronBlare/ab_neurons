@@ -67,14 +67,14 @@ void right_part_common(ConfigParam * cp, MainData * md, int sub_step, double * i
 		}
 	}
 
+	double x_neu_sum = 0.0;
+	for (int n_id = 0; n_id < cp->nn; n_id++)
+	{
+		x_neu_sum += md->args_neu[n_id][0];
+	}
+
 	if (md->size_env > 0)
 	{
-		double x_neu_sum = 0.0;
-		for (int n_id = 0; n_id < cp->nn; n_id++)
-		{
-			x_neu_sum += md->args_neu[n_id][0];
-		}
-
 		double y1_H = 1.0 / (1.0 + exp(-(x_neu_sum - cp->e_y1_theta) / cp->e_y1_k));
 		ks_env[0] = -cp->e_y1_alpha * (x_env[0] - y1_H);
 
@@ -121,7 +121,7 @@ void right_part_common(ConfigParam * cp, MainData * md, int sub_step, double * i
 		double I_leak = cp->e_3_g_l * (x_neu[2] - cp->e_3_E_l);
 		double I_mem = I_Na + I_K + I_leak;
 		double I_th = cp->e_3_I_th;
-		double I_syn = x_neu[1] / (1.0 + exp(-(x_neu[0] - cp->e_3_theta_x) / cp->e_3_k_x));
+		double I_syn = x_neu[1] / (1.0 + exp(-(x_neu_sum - cp->e_3_theta_x) / cp->e_3_k_x));
 		ks_neu[2] = (I_th - I_mem - I_syn) / cp->e_3_c;
 
 		double alpha_n = cp->e_4_alpha_a1 * (x_neu[2] + cp->e_4_alpha_a2) / (1.0 - exp(cp->e_4_alpha_a3 * (-cp->e_4_alpha_a2 - x_neu[2])));
