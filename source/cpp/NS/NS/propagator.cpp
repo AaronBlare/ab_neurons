@@ -131,9 +131,9 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 
 		for (int n_id = 0; n_id < cp->nn; n_id++)
 		{
-			double curr_Vpost = md->data_neu[n_id][2];
+			double curr_V = md->data_neu[n_id][2];
 
-			if (curr_Vpost > cp->thr_Vpost)
+			if (curr_V > cp->thr_Vpost)
 			{
 				if (md->curr_Vpost_status[n_id] == 0)
 				{
@@ -146,6 +146,27 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 				if (md->curr_Vpost_status[n_id] == 1)
 				{
 					md->curr_Vpost_status[n_id] = 0;
+				}
+			}
+
+			if (cp->is_eta_calc)
+			{
+				if (curr_V > cp->thr_eta)
+				{
+					if (md->curr_spike_status[n_id] == 0)
+					{
+						md->curr_spike_status[n_id] = 1;
+						md->curr_spike[n_id].first = md->time;
+					}
+				}
+				else
+				{
+					if (md->curr_Vpost_status[n_id] == 1)
+					{
+						md->curr_spike_status[n_id] = 0;
+						md->curr_spike[n_id].second = md->time;
+						md->thr_crosses[n_id].push_back(md->curr_spike[n_id]);
+					}
 				}
 			}
 		}

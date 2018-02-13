@@ -9,3 +9,11 @@ void calc_f_out(RunParam * rp, ConfigParam * cp, MainData * md)
 		md->f_out[n_id] = mean_freq;
 	}
 }
+
+void calc_eta(RunParam * rp, ConfigParam * cp, MainData * md)
+{
+	if (cp->is_eta_calc > 0)
+	{
+
+	}
+}

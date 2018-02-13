@@ -81,7 +81,6 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 	}
 }
 
-
 void weibull_exp(RunParam * rp, ConfigParam * cp)
 {
 	for (int f_in_id = 0; f_in_id < rp->f_in_num; f_in_id++)

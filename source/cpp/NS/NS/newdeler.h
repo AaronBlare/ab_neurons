@@ -33,8 +33,12 @@ void init_evo_data(RunParam * rp, ConfigParam * cp, MainData * md);
 
 void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md);
 
+void init_eta_data(RunParam * rp, ConfigParam * cp, MainData * md);
+
 void init_start(RunParam * rp, ConfigParam * cp, MainData * md);
 
 void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md);
 
 void free_model_data(MainData * md);
+
+void free_eta_data(RunParam * rp, ConfigParam * cp, MainData * md);
