@@ -205,6 +205,10 @@ void init_eta_data(RunParam * rp, ConfigParam * cp, MainData * md)
 			md->curr_spike[n_id].first = 0.0;
 			md->curr_spike[n_id].second = 0.0;
 		}
+
+		md->num_sync_spikes = 0;
+
+		md->eta = 0.0;
 	}
 }
 

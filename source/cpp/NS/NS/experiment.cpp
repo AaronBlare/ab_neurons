@@ -73,6 +73,9 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 
 				calc_eta(rp, cp, md);
 
+				string fn_eta = rp->path + "eta" + file_name_suffix(rp, cp, 4);
+				write_double_data(fn_eta, &(md->eta), 1, 16, 0);
+
 				proc->clear();
 
 				delete ndb;

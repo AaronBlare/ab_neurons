@@ -17,7 +17,7 @@ nd 4000
 thr_Vpost 0.0
 is_eta_calc 1
 thr_eta -40.0
-eta_window 3.0
+eta_window 8.0
 e_1_alpha_x 0.1 
 e_1_k_pre 2 
 e_1_k0 2 

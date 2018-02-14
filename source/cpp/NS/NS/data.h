@@ -50,5 +50,7 @@ struct MainData
 	int * curr_spike_status;
 	pair<double, double> * curr_spike;
 	vector< pair<pair<double, double>, int> > * thr_crosses;	// Vector of begins and ends of thr crossings 
+	int num_sync_spikes;
+	double eta;
 };
 
