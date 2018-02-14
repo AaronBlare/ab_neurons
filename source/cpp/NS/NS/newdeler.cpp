@@ -194,7 +194,7 @@ void init_eta_data(RunParam * rp, ConfigParam * cp, MainData * md)
 {
 	if (cp->is_eta_calc > 0)
 	{
-		md->thr_crosses = new vector<pair<double, double>>[cp->nn];
+		md->thr_crosses = new vector< pair<pair<double, double>, int> >[cp->nn];
 
 		md->curr_spike_status = new int[cp->nn];
 		md->curr_spike = new pair<double, double>[cp->nn];

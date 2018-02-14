@@ -96,6 +96,7 @@ struct ConfigParam
 
 	int is_eta_calc;
 	double thr_eta;
+	double eta_window;
 
 	double e_1_alpha_x;
 
@@ -166,6 +167,7 @@ struct ConfigParam
 
 		int _is_eta_calc = 0,
 		double _thr_eta = -40.0,
+		double _eta_window = 3.0,
 
 		double _e_1_alpha_x = 0.05,
 		double _e_1_k_pre = 1.0,
@@ -235,6 +237,7 @@ struct ConfigParam
 
 		is_eta_calc = _is_eta_calc;
 		thr_eta = _thr_eta;
+		eta_window = _eta_window;
 
 		e_1_alpha_x = _e_1_alpha_x;
 		e_1_k_pre = _e_1_k_pre;

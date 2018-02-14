@@ -161,11 +161,14 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 				}
 				else
 				{
-					if (md->curr_Vpost_status[n_id] == 1)
+					if (md->curr_spike_status[n_id] == 1)
 					{
 						md->curr_spike_status[n_id] = 0;
 						md->curr_spike[n_id].second = md->time;
-						md->thr_crosses[n_id].push_back(md->curr_spike[n_id]);
+
+						pair<pair<double, double>, int> vec_elem(md->curr_spike[n_id], n_id);
+
+						md->thr_crosses[n_id].push_back(vec_elem);
 					}
 				}
 			}

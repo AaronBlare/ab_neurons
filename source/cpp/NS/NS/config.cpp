@@ -115,6 +115,10 @@ void set_param(RunParam * rp, ConfigParam * cp, string str, string val)
 	{
 		cp->thr_eta = atof(val.c_str());
 	}
+	if (str.compare("eta_window") == 0)
+	{
+		cp->eta_window = atof(val.c_str());
+	}
 
 	if (str.compare("e_1_alpha_x") == 0)
 	{
@@ -345,6 +349,8 @@ void output_params(RunParam * rp, ConfigParam * cp)
 
 	cout << "is_eta_calc = " << cp->is_eta_calc << endl;
 	cout << "thr_eta = " << cp->thr_eta << endl;
+	cout << "eta_window = " << cp->eta_window << endl;
+
 
 	cout << "e_1_alpha_x = " << cp->e_1_alpha_x << endl;
 	cout << "e_1_k_pre = " << cp->e_1_k_pre << endl;
