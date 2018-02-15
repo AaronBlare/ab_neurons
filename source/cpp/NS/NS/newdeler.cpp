@@ -27,6 +27,7 @@ void init_all_data(RunParam * rp, ConfigParam * cp, MainData * md, int is_env)
 	init_evo_data(rp, cp, md);
 	init_propagation_data(rp, cp, md);
 	init_start(rp, cp, md);
+	init_eta_data(rp, cp, md);
 }
 
 void init_model_data(RunParam * rp, ConfigParam * cp, MainData * md, int is_env)
@@ -189,6 +190,28 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 	}
 }
 
+void init_eta_data(RunParam * rp, ConfigParam * cp, MainData * md)
+{
+	if (cp->is_eta_calc > 0)
+	{
+		md->thr_crosses = new vector< pair<pair<double, double>, int> >[cp->nn];
+
+		md->curr_spike_status = new int[cp->nn];
+		md->curr_spike = new pair<double, double>[cp->nn];
+		for (int n_id = 0; n_id < cp->nn; n_id++)
+		{
+			md->curr_spike_status[n_id] = 0;
+
+			md->curr_spike[n_id].first = 0.0;
+			md->curr_spike[n_id].second = 0.0;
+		}
+
+		md->num_sync_spikes = 0;
+
+		md->eta = 0.0;
+	}
+}
+
 void init_start(RunParam * rp, ConfigParam * cp, MainData * md)
 {
 	md->time_evo[md->curr_dump_id] = md->time;
@@ -264,6 +287,7 @@ void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md)
 	}
 
 	free_model_data(md);
+	free_eta_data(rp, cp, md);
 }
 
 void free_model_data(MainData * md)
@@ -277,4 +301,14 @@ void free_model_data(MainData * md)
 
 	delete[] md->streams_p;
 	delete[] md->streams_w;
+}
+
+void free_eta_data(RunParam * rp, ConfigParam * cp, MainData * md)
+{
+	if (cp->is_eta_calc > 0)
+	{
+		delete[] md->thr_crosses;
+		delete[] md->curr_spike_status;
+		delete[] md->curr_spike;
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "config.h"
 #include "utils.h"
+#include <vector>
 
 struct MainData
 {
@@ -45,5 +46,11 @@ struct MainData
 	int * curr_Vpost_status;	// Current status of Vpost
 	int * num_thr_cross_Vpost;	// Total number of crossings
 	double * f_out;				// f_out
+
+	int * curr_spike_status;
+	pair<double, double> * curr_spike;
+	vector< pair<pair<double, double>, int> > * thr_crosses;	// Vector of begins and ends of thr crossings 
+	int num_sync_spikes;
+	double eta;
 };
 
