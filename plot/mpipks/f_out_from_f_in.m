@@ -15,7 +15,7 @@ ns = ns * 60 * 1000;
 
 nsps = 1000;
 
-y1_gamma = 0.0;
+y1_gamma = -0.8;
 y2_gamma = 0.4;
 
 f_inv_start = 1.0;
