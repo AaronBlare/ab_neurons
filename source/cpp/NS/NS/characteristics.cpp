@@ -81,7 +81,7 @@ void calc_eta(RunParam * rp, ConfigParam * cp, MainData * md)
 			sum_spikes += double(md->thr_crosses[n_id].size());
 		}
 
-		md->eta = double(cp->nn) * double(md->num_sync_spikes) / sum_spikes;
+		md->eta = double(cp->nn) * double(md->num_sync_spikes - 1) / sum_spikes;
 
 		cout << "eta: " << md->eta << endl;
 	}
