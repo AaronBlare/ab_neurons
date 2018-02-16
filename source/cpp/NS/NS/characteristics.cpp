@@ -1,6 +1,4 @@
 #include "characteristics.h"
-#include <set> 
-#include <deque>
 
 struct greaters {
 	bool operator()(const pair<pair<double, double>, int>& a, const pair<pair<double, double>, int>& b) const
@@ -16,6 +14,9 @@ void calc_f_out(RunParam * rp, ConfigParam * cp, MainData * md)
 		cout << "num_thr_cross_Vpost for " << n_id << " neuron: " << md->num_thr_cross_Vpost[n_id] << endl;
 		double mean_freq = double(md->num_thr_cross_Vpost[n_id]) / (double(cp->ns) / 1000.0);
 		md->f_out[n_id] = mean_freq;
+
+		string fn_f_out = rp->path + "f_out_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+		write_double_data(fn_f_out, &(md->f_out[n_id]), 1, 16, 0);
 	}
 }
 
@@ -84,5 +85,31 @@ void calc_eta(RunParam * rp, ConfigParam * cp, MainData * md)
 		md->eta = double(cp->nn) * double(md->num_sync_spikes - 1) / sum_spikes;
 
 		cout << "eta: " << md->eta << endl;
+
+		string fn_eta = rp->path + "eta" + file_name_suffix(rp, cp, 4);
+		write_double_data(fn_eta, &(md->eta), 1, 16, 0);
+
+		double nss = double(md->num_sync_spikes - 1);
+		string fn_nss = rp->path + "nss" + file_name_suffix(rp, cp, 4);
+		write_double_data(fn_nss, &nss, 1, 16, 0);
+
+		if (cp->is_spikes_save > 0)
+		{
+			for (int n_id = 0; n_id < cp->nn; n_id++)
+			{
+				string fn_spikes_borders = rp->path + "spikes_borders_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+				ofstream ofs = ofstream(fn_spikes_borders);
+				if (ofs.is_open())
+				{
+					ofs << setprecision(16) << scientific;
+					for (int i = 0; i < md->thr_crosses[n_id].size(); i++)
+					{
+						ofs << md->thr_crosses[n_id][i].first.first << " " << md->thr_crosses[n_id][i].first.second << endl;
+					}
+
+					ofs.close();
+				}
+			}
+		}
 	}
 }
