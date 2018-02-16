@@ -51,30 +51,24 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 
 				proc->process();
 
+				string fn_time = rp->path + "time" + file_name_suffix(rp, cp, 4);
+				write_double_data(fn_time, md->time_evo, md->size_evo, 16, 0);
+
 				if (md->size_env > 0)
 				{
 					string fn_data_env = rp->path + "data_env" + file_name_suffix(rp, cp, 4);
 					write_2d_double_data(fn_data_env, md->data_env_evo, md->size_env, md->size_evo, 16, 0);
 				}
 
-				calc_f_out(rp, cp, md);
-
 				for (int n_id = 0; n_id < cp->nn; n_id++)
 				{
 					string fn_data_neu = rp->path + "data_neu_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
 					write_2d_double_data(fn_data_neu, md->data_neu_evo[n_id], md->size_neu, md->size_evo, 16, 0);
-
-					string fn_f_out = rp->path + "f_out_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
-					write_double_data(fn_f_out, &(md->f_out[n_id]), 1, 16, 0);
 				}
 
-				string fn_time = rp->path + "time" + file_name_suffix(rp, cp, 4);
-				write_double_data(fn_time, md->time_evo, md->size_evo, 16, 0);
+				calc_f_out(rp, cp, md);
 
 				calc_eta(rp, cp, md);
-
-				string fn_eta = rp->path + "eta" + file_name_suffix(rp, cp, 4);
-				write_double_data(fn_eta, &(md->eta), 1, 16, 0);
 
 				proc->clear();
 

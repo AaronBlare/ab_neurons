@@ -98,6 +98,8 @@ struct ConfigParam
 	double thr_eta;
 	double eta_window;
 
+	int is_spikes_save;
+
 	double e_1_alpha_x;
 
 	double e_1_2_f_in;
@@ -169,6 +171,8 @@ struct ConfigParam
 		double _thr_eta = -40.0,
 		double _eta_window = 3.0,
 
+		int _is_spikes_save = 1,
+
 		double _e_1_alpha_x = 0.05,
 		double _e_1_k_pre = 1.0,
 
@@ -238,6 +242,8 @@ struct ConfigParam
 		is_eta_calc = _is_eta_calc;
 		thr_eta = _thr_eta;
 		eta_window = _eta_window;
+
+		is_spikes_save = _is_spikes_save;
 
 		e_1_alpha_x = _e_1_alpha_x;
 		e_1_k_pre = _e_1_k_pre;
