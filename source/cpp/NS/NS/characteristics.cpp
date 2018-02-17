@@ -93,6 +93,13 @@ void calc_eta(RunParam * rp, ConfigParam * cp, MainData * md)
 		string fn_nss = rp->path + "nss" + file_name_suffix(rp, cp, 4);
 		write_double_data(fn_nss, &nss, 1, 16, 0);
 
+		for (int n_id = 0; n_id < cp->nn; n_id++)
+		{
+			int num_spikes = md->thr_crosses[n_id].size() - 1;
+			string fn_ns = rp->path + "num_spikes_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
+			write_int_data(fn_ns, &num_spikes, 1, 0);
+		}
+
 		if (cp->is_spikes_save > 0)
 		{
 			for (int n_id = 0; n_id < cp->nn; n_id++)
