@@ -410,9 +410,12 @@ void main()
 
 	//---Формирование Пуссон-выборки СВ для второго нейрона--------------------  
 
+	ofstream ofs_p = ofstream("Poisson.txt");
+	ofs_p << setprecision(16) << scientific;
 	for (i = 0; i < 1000000; i++)
 	{
 		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, streams_p[1], 1, &tmp, fin);
+		ofs_p << tmp << endl;
 		PD2[i] = double(tmp);
 	}
 	//--------------------------------------------------------------------------
@@ -428,8 +431,12 @@ void main()
 	ofstream ofs = ofstream("V.txt");
 	ofs << setprecision(16) << scientific;
 
+	ofstream ofs_H = ofstream("H.txt");
+	ofs_H << setprecision(16) << scientific;
+
 	ti1 = pti1 = PD1[0];
 	ti2 = pti2 = PD2[0];
+	ofs_p << PD2[0] << endl;
 	int si_1 = 0, si_2 = 0, flag1 = 0, flag2 = 0, prt = 20, cor = 0, prs = 400, prs1 = 400, prs2 = 400, cor1 = 0, cor2 = 0;
 
 	while (t < tout)
@@ -513,6 +520,7 @@ void main()
 			ofs << X[0] << " " << X[4] << endl;
 		}
 
+		ofs_H << Hx[1] << endl;
 		RUNGE4(14, X, t, SYS, hs, Hx);
 
 		curr_id++;
@@ -547,6 +555,8 @@ void main()
 	fclose(fbb);
 
 	ofs.close();
+	ofs_p.close();
+	ofs_H.close();
 
 	delete[]PD1;
 	delete[]PD2;
