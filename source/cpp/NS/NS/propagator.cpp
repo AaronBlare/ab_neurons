@@ -186,6 +186,7 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 					{
 						md->data_neu_evo[n_id][eq_id][md->curr_dump_id] = md->data_neu[n_id][eq_id];
 					}
+					md->data_neu_evo[n_id][md->size_neu][md->curr_dump_id] = impulses[n_id];
 				}
 
 				if (md->size_env > 0)
@@ -214,6 +215,7 @@ void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavio
 				{
 					md->data_neu_evo[n_id][eq_id][md->curr_dump_id] = md->data_neu[n_id][eq_id];
 				}
+				md->data_neu_evo[n_id][md->size_neu][md->curr_dump_id] = impulses[n_id];
 			}
 
 			if (md->size_env > 0)

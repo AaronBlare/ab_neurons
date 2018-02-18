@@ -109,8 +109,8 @@ void init_evo_data(RunParam * rp, ConfigParam * cp, MainData * md)
 	md->data_neu_evo = new double**[cp->nn];
 	for (int n_id = 0; n_id < cp->nn; n_id++)
 	{
-		md->data_neu_evo[n_id] = new double*[md->size_neu];
-		for (int eq_id = 0; eq_id < md->size_neu; eq_id++)
+		md->data_neu_evo[n_id] = new double*[md->size_neu + 1];
+		for (int eq_id = 0; eq_id < md->size_neu + 1; eq_id++)
 		{
 			md->data_neu_evo[n_id][eq_id] = new double[md->size_evo];
 			for (int dump_id = 0; dump_id < md->size_evo; dump_id++)
@@ -269,7 +269,7 @@ void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md)
 
 	for (int n_id = 0; n_id < cp->nn; n_id++)
 	{
-		for (int eq_id = 0; eq_id < md->size_neu; eq_id++)
+		for (int eq_id = 0; eq_id < md->size_neu + 1; eq_id++)
 		{
 			delete[] md->data_neu_evo[n_id][eq_id];
 		}
