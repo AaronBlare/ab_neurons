@@ -9,9 +9,9 @@ $data_path = "/data/biophys/yusipov/ab_neurons/gamma_1_from_gamma_2";
 
 $PI = 3.1415926535897932384626433832795;
 
-for($gamma_1_curr = -3.0; $gamma_1_curr <= -2.99; $gamma_1_curr += 1.0)
+for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 {
-	for($gamma_2_curr = 5.0; $gamma_2_curr <= 5.01; $gamma_2_curr += 1.0)
+	for($gamma_2_curr = 0.0; $gamma_2_curr <= 5.01; $gamma_2_curr += 0.1)
 	{
 		for($b_curr = 4.0; $b_curr <= 4.01; $b_curr += 1.0)
 		{
@@ -38,7 +38,7 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= -2.99; $gamma_1_curr += 1.0)
 				$nn = 2;
 				$ns = 5400000;
 				$nsps  = 1000;
-				$nd = 10;
+				$nd = 1;
 				$thr_Vpost = 0.0;
 				$is_eta_calc = 1;
 				$thr_eta = -40.0;

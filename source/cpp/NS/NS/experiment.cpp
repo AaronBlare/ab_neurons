@@ -63,7 +63,7 @@ void basic_exp(RunParam * rp, ConfigParam * cp)
 				for (int n_id = 0; n_id < cp->nn; n_id++)
 				{
 					string fn_data_neu = rp->path + "data_neu_" + to_string(n_id) + file_name_suffix(rp, cp, 4);
-					write_2d_double_data(fn_data_neu, md->data_neu_evo[n_id], md->size_neu, md->size_evo, 16, 0);
+					write_2d_double_data(fn_data_neu, md->data_neu_evo[n_id], md->size_neu + 1, md->size_evo, 16, 0);
 				}
 
 				calc_f_out(rp, cp, md);

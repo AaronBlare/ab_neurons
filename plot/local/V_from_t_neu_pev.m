@@ -17,22 +17,17 @@ fn = sprintf('%s/time_%s.txt', ...
         suffix);
 time = importdata(fn);
 
+data_path = '../../source/cpp/pev/pev';
+
 figure
 
 for n_id = 1:nn
     
-    suffix = sprintf('%d_fin(%0.4f)_b(%0.4f)_seed(%d)', ...
-        n_id - 1, ...
-        fin, ...
-        b, ...
-        seed);
-    
-    fn = sprintf('%s/data_neu_%s.txt', ...
-        data_path, ...
-        suffix);
+    fn = sprintf('%s/V.txt', ...
+        data_path);
     data = importdata(fn);
     
-    Vs = data(:, 3);
+    Vs = data(:, n_id);
     
     subplot(nn, 1, n_id);
     hLine = plot(time, Vs);
