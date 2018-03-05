@@ -1,17 +1,14 @@
 system 1 
 task 1 
 path  
-f_in_start 1
-f_in_shift 1 
-f_in_num 1 
-b_start 15
+b_start 20
 b_shift 1 
 b_num 1 
 seed_start 8
 seed_num 1
 max_num_seeds 1000000 
 nn 2
-ns 100
+ns 1000000
 nsps 1000 
 nd 100
 thr_Vpost 0.0
@@ -58,4 +55,4 @@ e_y1_gamma -3.0
 e_y2_alpha 0.01 
 e_y2_theta 1.0 
 e_y2_k 0.1
-e_y2_gamma 0
+e_y2_gamma 1.0

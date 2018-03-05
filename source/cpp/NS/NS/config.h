@@ -31,10 +31,6 @@ struct RunParam
 
 	string	path;				// Path to files (if nessesary)
 
-	double	f_in_start;			// Start value of f_in
-	double	f_in_shift;			// Shift of f_in
-	int		f_in_num;			// Number of slices f_in
-
 	double	b_start;			// Start value of b
 	double	b_shift;			// Shift of b
 	int		b_num;				// Number of slices b
@@ -49,10 +45,6 @@ struct RunParam
 
 		string _path = "",
 
-		double _f_in_start = 0.5,
-		double _f_in_shift = 0.1,
-		int _f_in_num = 1,
-
 		double _b_start = 5.0,
 		double _b_shift = 1.0,
 		int _b_num = 1,
@@ -66,10 +58,6 @@ struct RunParam
 		task = _task;
 
 		path = _path;
-
-		f_in_start = _f_in_start;
-		f_in_shift = _f_in_shift;
-		f_in_num = _f_in_num;
 
 		b_start = _b_start;
 		b_shift = _b_shift;
@@ -102,7 +90,8 @@ struct ConfigParam
 
 	double e_1_alpha_x;
 
-	double e_1_2_f_in;
+	vector<double> e_1_2_f_in;
+
 	double e_1_2_tau;
 	double e_1_k_pre;
 
@@ -178,7 +167,6 @@ struct ConfigParam
 
 		double _e_1_k0 = 2.0,
 
-		double _e_1_2_f_in = 0.5,
 		double _e_1_2_tau = 1.0,
 
 		double _e_2_alpha_I = 0.1,
@@ -250,7 +238,6 @@ struct ConfigParam
 
 		e_1_k0 = _e_1_k0;
 
-		e_1_2_f_in = _e_1_2_f_in;
 		e_1_2_tau = _e_1_2_tau;
 		
 		e_2_alpha_I = _e_2_alpha_I;
@@ -303,6 +290,6 @@ struct ConfigParam
 
 void set_param(RunParam * rp, ConfigParam * cp, string str, string val);
 
-void init_params(RunParam * rp, ConfigParam * cp, char * file_name);
+void init_params(RunParam * rp, ConfigParam * cp, char * file_name_config, char * file_name_fin);
 
 void output_params(RunParam * rp, ConfigParam * cp);

@@ -42,19 +42,6 @@ void set_param(RunParam * rp, ConfigParam * cp, string str, string val)
 		rp->path = val;
 	}
 
-	if (str.compare("f_in_start") == 0)
-	{
-		rp->f_in_start = atof(val.c_str());
-	}
-	if (str.compare("f_in_shift") == 0)
-	{
-		rp->f_in_shift = atof(val.c_str());
-	}
-	if (str.compare("f_in_num") == 0)
-	{
-		rp->f_in_num = atoi(val.c_str());
-	}
-
 	if (str.compare("b_start") == 0)
 	{
 		rp->b_start = atof(val.c_str());
@@ -298,10 +285,10 @@ void set_param(RunParam * rp, ConfigParam * cp, string str, string val)
 	}
 }
 
-void init_params(RunParam * rp, ConfigParam * cp, char * file_name)
+void init_params(RunParam * rp, ConfigParam * cp, char * file_name_config, char * file_name_fin)
 {
 	string line;
-	ifstream config_file(file_name);
+	ifstream config_file(file_name_config);
 	if (config_file.is_open())
 	{
 		while (getline(config_file, line))
@@ -321,6 +308,25 @@ void init_params(RunParam * rp, ConfigParam * cp, char * file_name)
 		cout << "Init with default params" << endl;
 	}
 
+	double val;
+	ifstream param_file(file_name_fin);
+	if (param_file.is_open())
+	{
+		while (getline(param_file, line))
+		{
+			std::istringstream iss(line);
+			iss >> val;
+			cp->e_1_2_f_in.push_back(val);
+		}
+
+		param_file.close();
+	}
+	else
+	{
+		cout << "Unable to open file" << endl;
+		cout << "Init with default params" << endl;
+	}
+
 	output_params(rp, cp);
 }
 
@@ -332,10 +338,6 @@ void output_params(RunParam * rp, ConfigParam * cp)
 	cout << "task = " << rp->task << endl;
 
 	cout << "path = " << rp->path << endl;
-
-	cout << "f_in_start = " << rp->f_in_start << endl;
-	cout << "f_in_shift = " << rp->f_in_shift << endl;
-	cout << "f_in_num = " << rp->f_in_num << endl;
 
 	cout << "b_start = " << rp->b_start << endl;
 	cout << "b_shift = " << rp->b_shift << endl;
@@ -411,4 +413,9 @@ void output_params(RunParam * rp, ConfigParam * cp)
 	cout << "e_y2_gamma = " << cp->e_y2_gamma << endl;
 
 	cout << "######################################" << endl;
+
+	for (int it = 0; it < cp->e_1_2_f_in.size(); it++)
+	{
+		std::cout << "fin_" << it << ": " << cp->e_1_2_f_in[it] << endl;
+	}
 }

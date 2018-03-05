@@ -6,7 +6,7 @@ void SimplePropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 	double * impulses = new double[cp->nn];
 	for (int n_id = 0; n_id < cp->nn; n_id++)
 	{
-		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &(md->time_lim[n_id]), cp->e_1_2_f_in);
+		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &(md->time_lim[n_id]), cp->e_1_2_f_in[n_id]);
 		last_impulse[n_id] = -1;
 		impulses[n_id] = 0.0;
 	}
@@ -21,12 +21,12 @@ void SimplePropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainD
 
 				vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md->streams_w[n_id], 1, &(md->A[n_id]), 2.0, 0.0, cp->e_2_b);
 
-				viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in);
+				viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in[n_id]);
 				md->time_lim[n_id] += time_lim;
 
 				while (time_lim <= 1)
 				{
-					viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in);
+					viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in[n_id]);
 					md->time_lim[n_id] += time_lim;
 				}
 
@@ -55,7 +55,7 @@ void FullPropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 	double * impulses = new double[cp->nn];
 	for (int n_id = 0; n_id < cp->nn; n_id++)
 	{
-		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &(md->time_lim[n_id]), cp->e_1_2_f_in);
+		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &(md->time_lim[n_id]), cp->e_1_2_f_in[n_id]);
 		last_impulse[n_id] = -1;
 		impulses[n_id] = 0.0;
 	}
@@ -71,12 +71,12 @@ void FullPropagationBehavior::propagate(RunParam * rp, ConfigParam * cp, MainDat
 				double b = cp->e_2_b * (1.0 + cp->e_y2_gamma * md->data_env[1]);
 				vdRngWeibull(VSL_RNG_METHOD_WEIBULL_ICDF, md->streams_w[n_id], 1, &(md->A[n_id]), 2.0, 0.0, b);
 
-				viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in);
+				viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in[n_id]);
 				md->time_lim[n_id] += time_lim;
 
 				while (time_lim <= 1)
 				{
-					viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in);
+					viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[n_id], 1, &time_lim, cp->e_1_2_f_in[n_id]);
 					md->time_lim[n_id] += time_lim;
 				}
 
