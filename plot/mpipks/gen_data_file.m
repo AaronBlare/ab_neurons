@@ -17,9 +17,9 @@ ns = ns * 60 * 1000;
 
 nsps = 1000;
 
-y1_gamma_start = -3.0;
+y1_gamma_start = -5.0;
 y1_gamma_shift = 0.1;
-y1_gamma_num = 31;
+y1_gamma_num = 51;
 
 y2_gamma_start = 0.0;
 y2_gamma_shift = 0.1;

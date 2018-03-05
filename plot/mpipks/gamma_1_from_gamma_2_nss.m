@@ -15,20 +15,20 @@ nn = 2;
 ns = 90;
 ns = ns * 60 * 1000;
 
-nsps = 1000;
+nsps = 200;
 
 num_seconds = ns / 1000;
 avg_window = 1000;
 
-y1_gamma_start = -3.0;
+y1_gamma_start = -5.0;
 y1_gamma_shift = 0.1;
-y1_gamma_num = 31;
+y1_gamma_num = 51;
 
 y2_gamma_start = 0.0;
 y2_gamma_shift = 0.1;
 y2_gamma_num = 51;
 
-f_inv_start = 5.0;
+f_inv_start = 4.0;
 f_inv_shift = 1.0;
 f_inv_num = 1;
 
@@ -40,7 +40,8 @@ thr_Vpost = 0.0;
 
 eta_window = 8.0;
 
-seed_start = 0;
+seed_start = 100;
+seed_start = seed_start * nn;
 seed_shift = nn;
 seed_num = 1;
 
@@ -63,14 +64,14 @@ for y1_gamma_id = 1:y1_gamma_num
             
             seed = seed_start + (seed_id - 1) * seed_shift;
             
-            path_to_folder = sprintf('%s/system_%d/task_%d/nn_%d/ns_%d/nsps_%d/y1_gamma_%0.4f/y2_gamma_%0.4f/f_in_%0.4f/b_%0.4f/thr_Vpost_%0.4f/eta_%0.4f/seed_%d', ...
+            path_to_folder = sprintf('%s/system_%d/task_%d/nn_%d/ns_%d/nsps_%d/y1_gamma_-%0.4f/y2_gamma_%0.4f/f_in_%0.4f/b_%0.4f/thr_Vpost_%0.4f/eta_%0.4f/seed_%d', ...
                 data_path, ...
                 sys_id, ...
                 task, ...
                 nn, ...
                 ns, ...
                 nsps, ...
-                y1_gamma, ...
+                abs(y1_gamma), ...
                 y2_gamma, ...
                 f_inv_start, ...
                 b_start, ...
@@ -91,7 +92,7 @@ for y1_gamma_id = 1:y1_gamma_num
         nss_avg = nss_avg / seed_num;
 		nss_avg = nss_avg / num_seconds * avg_window;
         
-        nss(y1_gamma_id, y2_gamma_id) = log10(nss_avg + 1.0e-16);
+        nss(y1_gamma_id, y2_gamma_id) = nss_avg;
     end
 end
 
@@ -105,7 +106,7 @@ ylabel('$\gamma_2$', 'Interpreter', 'latex');
 colormap hot;
 h = colorbar;
 set(gca, 'FontSize', 30);
-title(h, 'log_{10}(NSS)', 'FontSize', 33);
+title(h, 'NSS', 'FontSize', 33);
 set(gca,'YDir','normal');
 hold all;
 
@@ -117,9 +118,9 @@ fn_suffix = sprintf('system(%d)_gamma1(%0.4f)_gamma2(%0.4f)_fin(%0.4f)_b(%0.4f)_
     b_start, ...
 	eta_window);
      
-savefig(sprintf('%s/gamma_1_from_gamma_log_nss_2_%s.fig', home_figures_path, fn_suffix));
+savefig(sprintf('%s/gamma_1_from_gamma_nss_2_%s.fig', home_figures_path, fn_suffix));
 
-file_name = sprintf('%s/gamma_1_from_gamma_2_log_nss_%s.txt', home_data_path, fn_suffix);
+file_name = sprintf('%s/gamma_1_from_gamma_2_nss_%s.txt', home_data_path, fn_suffix);
 file_id = fopen(file_name, 'w');
 for y1_id = 1:size(y1_gammas, 1)
 	for y2_id = 1:size(y2_gammas, 1)
