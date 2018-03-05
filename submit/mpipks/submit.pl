@@ -9,26 +9,26 @@ $data_path = "/data/biophys/yusipov/ab_neurons/gamma_1_from_gamma_2";
 
 $PI = 3.1415926535897932384626433832795;
 
-for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
+for($gamma_1_curr = -5.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.1)
 {
-	for($gamma_2_curr = 0.0; $gamma_2_curr <= 5.01; $gamma_2_curr += 0.1)
+	for($gamma_2_curr = 0.0; $gamma_2_curr <= 5.000001; $gamma_2_curr += 0.1)
 	{
-		for($b_curr = 4.0; $b_curr <= 4.01; $b_curr += 1.0)
+		for($b_curr = 4.0; $b_curr <= 4.000001; $b_curr += 1.0)
 		{
-			for($f_in_Hz = 1.0; $f_in_Hz <= 1.01; $f_in_Hz += 1.0)
+			for($f_in_Hz = 1.0; $f_in_Hz <= 1.00001; $f_in_Hz += 10.0)
 			{
 				print "f_in_Hz = $f_in_Hz\n";
 				
 				#$val = 1000.0 / $f_in_Hz;
 				
-				$val = 5;
+				$val = 4;
 				
+				$f_in_0 = $val;
+				$f_in_1 = $val;
+
 				$sys_id = 1;
 				$task = 1;
 				$path = "";
-				$f_in_start = $val;
-				$f_in_shift = 1.0;
-				$f_in_num = 1;
 				$b_start = $b_curr;
 				$b_shift = 1.0;
 				$b_num = 1;
@@ -37,7 +37,7 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 				$max_num_seeds = 1000000;
 				$nn = 2;
 				$ns = 5400000;
-				$nsps  = 1000;
+				$nsps  = 200;
 				$nd = 1;
 				$thr_Vpost = 0.0;
 				$is_eta_calc = 1;
@@ -57,8 +57,8 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 				$e_3_E_K = -77.0;
 				$e_3_g_l = 0.3;
 				$e_3_E_l = -54.4;
-				$e_3_I_th = 6.3;
-				$e_3_theta_x = 1.0;
+				$e_3_I_th = 5.7;
+				$e_3_theta_x = 1.2;
 				$e_3_k_x = 0.01;
 				$e_4_alpha_a1 = 0.01;
 				$e_4_alpha_a2 = 55.0;
@@ -77,25 +77,24 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 				$e_6_beta_b1 = 0.1;
 				$e_6_beta_b2 = 35.0;
 				$e_y1_alpha = 0.01;
-				$e_y1_theta = 1.0;
+				$e_y1_theta = 1.2;
 				$e_y1_k = 0.1;
 				$e_y1_gamma = $gamma_1_curr;
 				$e_y2_alpha = 0.01;
-				$e_y2_theta = 1.0;
+				$e_y2_theta = 1.2;
 				$e_y2_k = 0.1;
 				$e_y2_gamma = $gamma_2_curr;
 				
-				
 				$e_y1_gamma_str = sprintf("%.4f", $e_y1_gamma);
 				$e_y2_gamma_str = sprintf("%.4f", $e_y2_gamma);
-				$f_in_str = sprintf("%.4f", $f_in_start);
+				$f_in_str = sprintf("%.4f", $f_in_0);
 				$b_str = sprintf("%.4f", $b_start);
 				$thr_Vpost_str = sprintf("%.4f", $thr_Vpost);
 				$thr_eta_str = sprintf("%.4f", $thr_eta);
 				$eta_window_str = sprintf("%.4f", $eta_window);
 					
-				$start = 0;
-				$finish = 1;
+				$start = 114;
+				$finish = 115;
 				%exp = ();
 				$i = $start;
 				
@@ -136,14 +135,10 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 						
 					print "$seed_start \n";
 					
-					open( WF,">$key/config.txt");
-					
+					open( WF,">$key/config.txt");	
 					print WF "system $sys_id \n"; 
 					print WF "task $task \n"; 
 					print WF "path $path \n"; 
-					print WF "f_in_start $f_in_start \n"; 
-					print WF "f_in_shift $f_in_shift \n"; 
-					print WF "f_in_num $f_in_num \n"; 
 					print WF "b_start $b_start \n"; 
 					print WF "b_shift $b_shift \n"; 
 					print WF "b_num $b_num \n"; 
@@ -199,10 +194,14 @@ for($gamma_1_curr = -3.0; $gamma_1_curr <= 0.01; $gamma_1_curr += 0.1)
 					print WF "e_y2_theta $e_y2_theta \n";
 					print WF "e_y2_k $e_y2_k \n";
 					print WF "e_y2_gamma $e_y2_gamma \n";
+					close WF;
 					
+					open( WF,">$key/fin.txt"); 
+					print WF "$f_in_0 \n"; 
+					print WF "$f_in_1 \n";
 					close WF;
 
-					$test_file = sprintf('%s/f_out_0_fin(%0.4f)_b(%0.4f)_seed(%d).txt', $key, $f_in_start, $b_start, $i);
+					$test_file = sprintf('%s/f_out_0_fin(%0.4f)_b(%0.4f)_seed(%d).txt', $key, $f_in_0, $b_start, $i);
 						
 					unless (-e "$test_file")
 					{	

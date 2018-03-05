@@ -3,7 +3,7 @@ clear all;
 home_figures_path = '/home/yusipov/Work/ab_neurons/figures';
 home_data_path = '/home/yusipov/Work/ab_neurons/data';
 
-data_path = '/data/biophys/yusipov/ab_neurons/eta_from_b_without_g';
+data_path = '/data/biophys/yusipov/ab_neurons/gamma_1_from_gamma_2';
 data_path = sprintf('%s', data_path);
 
 sys_id = 1;
@@ -18,9 +18,9 @@ ns = ns * 60 * 1000;
 nsps = 1000;
 
 y1_gamma = 0.0;
-y2_gamma = 0.0;
+y2_gamma = 3.0;
 
-f_inv_start = 7.0;
+f_inv_start = 5.0;
 f_inv_shift = 1.0;
 f_inv_num = 1;
 
@@ -34,7 +34,7 @@ eta_window = 8.0;
 
 seed_start = 0;
 seed_shift = nn;
-seed_num = 20;
+seed_num = int32(20 / nn);
 
 bs = zeros(b_num, 1);
 fouts = zeros(b_num, 1);

@@ -12,7 +12,7 @@ int main(int argc, char ** argv)
 
 	RunParam * rp = new RunParam();
 	ConfigParam * cp = new ConfigParam();
-	init_params(rp, cp, "config.txt");
+	init_params(rp, cp, "config.txt", "fin.txt");
 
 	double time = omp_get_wtime();
 

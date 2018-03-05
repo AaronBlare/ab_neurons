@@ -23,7 +23,7 @@ void poisson_dist(RunParam * rp, ConfigParam * cp, MainData * md)
 	for (int dump_id = 0; dump_id < md->size_evo; dump_id++)
 	{
 		int H_x = 0;
-		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[0], 1, &(H_x), cp->e_1_2_f_in);
+		viRngPoisson(VSL_RNG_METHOD_POISSON_PTPE, md->streams_p[0], 1, &(H_x), cp->e_1_2_f_in[0]);
 		md->H_x_evo[dump_id] = H_x;
 	}
 }
