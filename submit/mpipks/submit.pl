@@ -93,8 +93,8 @@ for($gamma_1_curr = -5.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.1)
 				$thr_eta_str = sprintf("%.4f", $thr_eta);
 				$eta_window_str = sprintf("%.4f", $eta_window);
 					
-				$start = 113;
-				$finish = 114;
+				$start = 114;
+				$finish = 115;
 				%exp = ();
 				$i = $start;
 				

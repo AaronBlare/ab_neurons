@@ -20,6 +20,7 @@ mkdir -p $scratch
 mkdir -p $1
 cd $scratch
 cp $1/config.txt .
+cp $1/fin.txt .
 
 # Execution - running the actual program .
 # [ Remember : Don ’ t read or write to / home from here .]
@@ -28,6 +29,7 @@ echo " Running on $(hostname)"
 echo " We are in $(pwd) "
 
 cat config.txt
+cat fin.txt
 $code_base/NS.out
 
 # Finish - Copy files back to your home directory , clean up .
