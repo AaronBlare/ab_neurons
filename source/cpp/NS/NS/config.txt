@@ -8,7 +8,7 @@ seed_start 8
 seed_num 1
 max_num_seeds 1000000 
 nn 2
-ns 1000000
+ns 100000
 nsps 1000 
 nd 100
 thr_Vpost 0.0

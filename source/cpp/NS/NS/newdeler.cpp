@@ -1,4 +1,5 @@
 #include "newdeler.h"
+#include <limits>
 
 void SimpleNewDelBehaviour::init_data(RunParam * rp, ConfigParam * cp, MainData * md) const
 {
@@ -149,6 +150,9 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 	md->k3s_neu = new  double*[cp->nn];
 	md->k4s_neu = new  double*[cp->nn];
 
+	md->data_neu_max = new double*[cp->nn];
+	md->data_neu_min = new double*[cp->nn];
+
 	for (int n_id = 0; n_id < cp->nn; n_id++)
 	{
 		md->data_neu[n_id] = new double[md->size_neu];
@@ -158,6 +162,9 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 		md->k3s_neu[n_id] = new  double[md->size_neu];
 		md->k4s_neu[n_id] = new  double[md->size_neu];
 
+		md->data_neu_max[n_id] = new double[md->size_neu];
+		md->data_neu_min[n_id] = new double[md->size_neu];
+
 		for (int eq_id = 0; eq_id < md->size_neu; eq_id++)
 		{
 			md->data_neu[n_id][eq_id] = 0.0;
@@ -166,6 +173,9 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 			md->k2s_neu[n_id][eq_id] = 0.0;
 			md->k3s_neu[n_id][eq_id] = 0.0;
 			md->k4s_neu[n_id][eq_id] = 0.0;
+
+			md->data_neu_max[n_id][eq_id] = -1.0e16;
+			md->data_neu_min[n_id][eq_id] = +1.0e16;
 		}
 	}
 
@@ -178,6 +188,9 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 		md->k3s_env = new  double[md->size_env];
 		md->k4s_env = new  double[md->size_env];
 
+		md->data_env_max = new double[md->size_env];
+		md->data_env_min = new double[md->size_env];
+
 		for (int eq_id = 0; eq_id < md->size_env; eq_id++)
 		{
 			md->data_env[eq_id] = 0.0;
@@ -186,6 +199,9 @@ void init_propagation_data(RunParam * rp, ConfigParam * cp, MainData * md)
 			md->k2s_env[eq_id] = 0.0;
 			md->k3s_env[eq_id] = 0.0;
 			md->k4s_env[eq_id] = 0.0;
+
+			md->data_env_max[eq_id] = -1.0e16;
+			md->data_env_min[eq_id] = +1.0e16;
 		}
 	}
 }
@@ -247,6 +263,9 @@ void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md)
 		delete[] md->k2s_neu[n_id];
 		delete[] md->k3s_neu[n_id];
 		delete[] md->k4s_neu[n_id];
+
+		delete[] md->data_neu_max[n_id];
+		delete[] md->data_neu_min[n_id];
 	}
 	delete[] md->data_neu;
 	delete[] md->args_neu;
@@ -254,6 +273,9 @@ void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md)
 	delete[] md->k2s_neu;
 	delete[] md->k3s_neu;
 	delete[] md->k4s_neu;
+
+	delete[] md->data_neu_max;
+	delete[] md->data_neu_min;
 
 	if (md->size_env > 0)
 	{
@@ -263,6 +285,9 @@ void free_all_data(RunParam * rp, ConfigParam * cp, MainData * md)
 		delete[] md->k2s_env;
 		delete[] md->k3s_env;
 		delete[] md->k4s_env;
+
+		delete[] md->data_env_max;
+		delete[] md->data_env_min;
 	}
 
 	delete[] md->time_evo;

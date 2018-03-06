@@ -24,4 +24,6 @@ public:
 
 void rk_step(ConfigParam * cp, MainData * md, RightPartBehavior * rpb, double * impulses);
 
+void update_max_min(ConfigParam * cp, MainData * md);
+
 void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb, int sec_id, double * impulses);
