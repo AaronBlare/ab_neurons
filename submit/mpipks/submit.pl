@@ -9,19 +9,19 @@ $data_path = "/data/biophys/yusipov/ab_neurons/gamma_1_from_gamma_2";
 
 $PI = 3.1415926535897932384626433832795;
 
-for($gamma_1_curr = -5.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.1)
+for($gamma_1_curr = 0.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.2)
 {
-	for($gamma_2_curr = 0.0; $gamma_2_curr <= 5.000001; $gamma_2_curr += 0.1)
+	for($gamma_2_curr = 0.0; $gamma_2_curr <= 5.000001; $gamma_2_curr += 0.2)
 	{
-		for($b_curr = 4.0; $b_curr <= 4.000001; $b_curr += 1.0)
+		for($b_curr = 2.0; $b_curr <= 2.000001; $b_curr += 2.0)
 		{
-			for($f_in_Hz = 1.0; $f_in_Hz <= 1.00001; $f_in_Hz += 10.0)
+			for($f_in_Hz = 1.0; $f_in_Hz <= 1.00001; $f_in_Hz += 50.0)
 			{
 				print "f_in_Hz = $f_in_Hz\n";
 				
 				#$val = 1000.0 / $f_in_Hz;
 				
-				$val = 4;
+				$val = 2;
 				
 				$f_in_0 = $val;
 				$f_in_1 = $val;
@@ -36,8 +36,8 @@ for($gamma_1_curr = -5.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.1)
 				$seed_num = 1;
 				$max_num_seeds = 1000000;
 				$nn = 2;
-				$ns = 5400000;
-				$nsps  = 200;
+				$ns = 600000;
+				$nsps  = 1000;
 				$nd = 1;
 				$thr_Vpost = 0.0;
 				$is_eta_calc = 1;
@@ -93,8 +93,8 @@ for($gamma_1_curr = -5.0; $gamma_1_curr <= 0.000001; $gamma_1_curr += 0.1)
 				$thr_eta_str = sprintf("%.4f", $thr_eta);
 				$eta_window_str = sprintf("%.4f", $eta_window);
 					
-				$start = 114;
-				$finish = 115;
+				$start = 0;
+				$finish = 20;
 				%exp = ();
 				$i = $start;
 				

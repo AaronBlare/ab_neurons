@@ -26,12 +26,18 @@ struct MainData
 	double ** k3s_neu;			// Integration routines data for neurons
 	double ** k4s_neu;			// Integration routines data for neurons
 
+	double ** data_neu_max;		// Max data for neurons
+	double ** data_neu_min;		// Min data for neurons
+
 	double * data_env;			// Integration data for enviroment
 	double * args_env;			// Integration routines data for enviroment
 	double * k1s_env;			// Integration routines data for enviroment
 	double * k2s_env;			// Integration routines data for enviroment
 	double * k3s_env;			// Integration routines data for enviroment
 	double * k4s_env;			// Integration routines data for enviroment
+
+	double * data_env_max;		// Max data for enviroment
+	double * data_env_min;		// Min data for enviroment
 
 	int size_evo;				// Size of evo data
 	int curr_dump_id;			// Current dump id

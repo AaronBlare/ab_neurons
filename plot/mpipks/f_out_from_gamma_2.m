@@ -25,17 +25,17 @@ y2_gamma_start = 0.0;
 y2_gamma_shift = 0.2;
 y2_gamma_num = 26;
 
-f_inv_start = 5.0;
+f_inv_start = 2.0;
 f_inv_shift = 10.0;
 f_inv_num = 1;
 
-b = 2.5;
+b = 2.0;
 
 thr_Vpost = 0.0;
 
 seed_start = 0;
 seed_shift = nn;
-seed_num = 200;
+seed_num = 20;
 
 eta_window = 8.0;
 

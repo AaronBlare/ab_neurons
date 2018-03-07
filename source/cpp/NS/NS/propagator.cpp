@@ -121,12 +121,48 @@ void rk_step(ConfigParam * cp, MainData * md, RightPartBehavior * rpb, double * 
 	rpb->rk_final(cp, md, md->step);
 }
 
+void update_max_min(ConfigParam * cp, MainData * md)
+{
+	for (int n_id = 0; n_id < cp->nn; n_id++)
+	{
+		for (int eq_id = 0; eq_id < md->size_neu + 1; eq_id++)
+		{
+			if (md->data_neu[n_id][eq_id] > md->data_neu_max[n_id][eq_id])
+			{
+				md->data_neu_max[n_id][eq_id] = md->data_neu[n_id][eq_id];
+			}
+
+			if (md->data_neu[n_id][eq_id] < md->data_neu_min[n_id][eq_id])
+			{
+				md->data_neu_min[n_id][eq_id] = md->data_neu[n_id][eq_id];
+			}
+		}
+	}
+
+	if (md->size_env > 0)
+	{
+		for (int eq_id = 0; eq_id < md->size_env; eq_id++)
+		{
+			if (md->data_env[eq_id] > md->data_env_max[eq_id])
+			{
+				md->data_env_max[eq_id] = md->data_env[eq_id];
+			}
+
+			if (md->data_env[eq_id] < md->data_env_min[eq_id])
+			{
+				md->data_env_min[eq_id] = md->data_env[eq_id];
+			}
+		}
+	}
+}
+
 void int_second(RunParam * rp, ConfigParam * cp, MainData * md, RightPartBehavior * rpb, int sec_id, double * impulses)
 {
 	for (int step_id = 0; step_id < cp->nsps; step_id++)
 	{
 		md->time = double(sec_id) + double(step_id) * md->step;
 		rk_step(cp, md, rpb, impulses);
+		update_max_min(cp, md);
 		md->time = double(sec_id) + double(step_id + 1) * md->step;
 
 		for (int n_id = 0; n_id < cp->nn; n_id++)
